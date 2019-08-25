@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,22 +20,27 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: invalidgamegeniecode.hh,v 1.4 2005/07/30 20:08:38 technoplaza Exp $
+// $Id: invalidgamegeniecode.hh,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
 
 #ifndef _INVALIDGAMEGENIECODEEXCEPTION_HH
 #define _INVALIDGAMEGENIECODEEXCEPTION_HH
+
+#include <stdexcept>
 
 namespace emuWorks {
     /**
      * An exception thrown when a game genie code is invalid.
      */
-    class InvalidGameGenieCodeException {
+    class InvalidGameGenieCodeException : public std::runtime_error {
     public:
         /**
          * Constructor for an InvalidGameGenieCodeException.
          */
-        InvalidGameGenieCodeException() {}
+        InvalidGameGenieCodeException();
     };
+    
+    inline InvalidGameGenieCodeException::InvalidGameGenieCodeException() :
+        std::runtime_error("InvalidGameGenieCodeException") {}
 }
 
 #endif

@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: rawcode.hh,v 1.3 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: rawcode.hh,v 1.6 2006/08/19 05:15:37 technoplaza Exp $
 
 #ifndef _RAWCODE_HH
 #define _RAWCODE_HH
@@ -30,13 +30,22 @@ namespace emuWorks {
      * Interface for a raw hex/PAR code.
      */
     class RawCode {
+    protected:
+        int address;
+        int value;
+        
     public:
+        /**
+         * Virtual destructor for RawCode derivatives.
+         */
+        virtual ~RawCode();
+    
         /**
          * Gets the address of this RawCode.
          *
          * @return The address.
          */
-        virtual int getAddress() { return address; }
+        virtual int getAddress() const;
         
         /**
          * Sets the address of this RawCode.
@@ -50,7 +59,7 @@ namespace emuWorks {
          *
          * @return The value.
          */
-        virtual int getValue() { return value; }
+        virtual int getValue() const;
         
         /**
          * Sets the value of this RawCode.
@@ -58,10 +67,11 @@ namespace emuWorks {
          * @param value The new value.
          */
         virtual void setValue(int value) = 0;
-    protected:
-        int address;
-        int value;
     };
+    
+    inline RawCode::~RawCode() {}
+    inline int RawCode::getAddress() const { return address; }
+    inline int RawCode::getValue() const { return value; }
 }
 
 #endif

@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,23 +20,26 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-// $Id: geniedialog.cc,v 1.1 2005/07/30 02:28:05 technoplaza Exp $
+// $Id: geniedialog.cc,v 1.5 2006/08/18 22:35:58 technoplaza Exp $
 
 #include <QValidator>
 
-#include "geniedialog.hh"
-#include "system.hh"
-#include "../tools/decoder.hh"
-#include "../tools/encoder.hh"
-#include "../model/nesgamegeniecode.hh"
-#include "../model/nesrawcode.hh"
-#include "../model/snesgamegeniecode.hh"
-#include "../model/snesrawcode.hh"
-#include "../model/genesisgamegeniecode.hh"
-#include "../model/genesisrawcode.hh"
-#include "../model/gbgggamegeniecode.hh"
-#include "../model/gbggrawcode.hh"
-#include "../exceptions/invalidgamegeniecode.hh"
+#include "exceptions/invalidgamegeniecode.hh"
+
+#include "model/gbgggamegeniecode.hh"
+#include "model/gbggrawcode.hh"
+#include "model/genesisgamegeniecode.hh"
+#include "model/genesisrawcode.hh"
+#include "model/nesgamegeniecode.hh"
+#include "model/nesrawcode.hh"
+#include "model/snesgamegeniecode.hh"
+#include "model/snesrawcode.hh"
+
+#include "tools/decoder.hh"
+#include "tools/encoder.hh"
+
+#include "view/geniedialog.hh"
+#include "view/system.hh"
 
 using namespace emuWorks;
 
@@ -78,137 +81,6 @@ GenieDialog::~GenieDialog() {
     delete snesValidator;
     delete genesisValidator;
     delete gbggValidator;
-}
-
-void GenieDialog::reset() {
-    encoding = true;
-    decoding = true;
-    
-    ui.gamegenieEdit->clear();
-    ui.valueEdit->clear();
-    ui.addressEdit->clear();
-    ui.compareEdit->clear();
-    
-    encoding = false;
-    encoding = false;
-}
-
-void GenieDialog::on_nesRadio_toggled(bool checked) {
-    if (checked) {
-        reset();
-        system = NES;
-        ui.compareEdit->setEnabled(true);
-        
-        ui.valueEdit->setMaxLength(2);
-        ui.addressEdit->setMaxLength(4);
-        ui.gamegenieEdit->setMaxLength(8);
-        ui.gamegenieEdit->setValidator(nesValidator);
-    }
-}
-
-void GenieDialog::on_snesRadio_toggled(bool checked) {
-    if (checked) {
-        reset();
-        system = SNES;
-        ui.compareEdit->setEnabled(false);
-        
-        ui.valueEdit->setMaxLength(2);
-        ui.addressEdit->setMaxLength(6);
-        ui.gamegenieEdit->setMaxLength(9);
-        ui.gamegenieEdit->setValidator(snesValidator);
-    }
-}
-
-void GenieDialog::on_genesisRadio_toggled(bool checked) {
-    if (checked) {
-        reset();
-        system = GENESIS;
-        ui.compareEdit->setEnabled(false);
-        
-        ui.valueEdit->setMaxLength(4);
-        ui.addressEdit->setMaxLength(6);
-        ui.gamegenieEdit->setMaxLength(9);
-        ui.gamegenieEdit->setValidator(genesisValidator);
-    }
-}
-
-void GenieDialog::on_gbggRadio_toggled(bool checked) {
-    if (checked) {
-        reset();
-        system = GBGG;
-        ui.compareEdit->setEnabled(true);
-        
-        ui.valueEdit->setMaxLength(2);
-        ui.addressEdit->setMaxLength(4);
-        ui.gamegenieEdit->setMaxLength(11);
-        ui.gamegenieEdit->setValidator(gbggValidator);
-    }
-}
-
-void GenieDialog::encode() {
-    if (decoding) {
-        return;
-    }
-    
-    encoding = true;
-    
-    bool ok;
-    
-    int value = ui.valueEdit->text().toInt(&ok, 16);
-    int address = ui.addressEdit->text().toInt(&ok, 16);
-    int compare = ui.compareEdit->text().toInt(&ok, 16);
-    
-    if (system == NES) {
-        NESRawCode *rawcode;
-        
-        if (!ui.compareEdit->text().isEmpty()) {
-            rawcode = new NESRawCode(address, value, compare);
-        } else {
-            rawcode = new NESRawCode(address, value);
-        }
-        
-        NESGameGenieCode ggcode = Encoder::encode(*rawcode);
-        ui.gamegenieEdit->setText(ggcode.getCode());
-        
-        delete rawcode;
-    } else if (system == SNES) {
-        SNESRawCode rawcode(address, value);
-        SNESGameGenieCode ggcode = Encoder::encode(rawcode);
-        ui.gamegenieEdit->setText(ggcode.getCode());
-    } else if (system == GENESIS) {
-        GenesisRawCode rawcode(address, value);
-        GenesisGameGenieCode ggcode = Encoder::encode(rawcode);
-        ui.gamegenieEdit->setText(ggcode.getCode());
-    } else if (system == GBGG) {
-        GBGGRawCode *rawcode;
-        
-        if (!ui.compareEdit->text().isEmpty()) {
-            rawcode = new GBGGRawCode(address, value, compare);
-        } else {
-            rawcode = new GBGGRawCode(address, value);
-        }
-        
-        GBGGGameGenieCode ggcode = Encoder::encode(*rawcode);
-        ui.gamegenieEdit->setText(ggcode.getCode());
-        
-        delete rawcode;
-    }
-    
-    encoding = false;
-}
-
-void GenieDialog::on_valueEdit_textEdited(const QString &) {
-    encode();
-}
-
-
-void GenieDialog::on_addressEdit_textEdited(const QString &) {
-    encode();
-}
-
-
-void GenieDialog::on_compareEdit_textEdited(const QString &) {
-    encode();
 }
 
 void GenieDialog::decode() {
@@ -281,7 +153,136 @@ void GenieDialog::decode() {
     decoding = false;
 }
 
+void GenieDialog::encode() {
+    if (decoding) {
+        return;
+    }
+    
+    encoding = true;
+    
+    bool ok;
+    
+    int value = ui.valueEdit->text().toInt(&ok, 16);
+    int address = ui.addressEdit->text().toInt(&ok, 16);
+    int compare = ui.compareEdit->text().toInt(&ok, 16);
+    
+    if (system == NES) {
+        NESRawCode *rawcode;
+        
+        if (!ui.compareEdit->text().isEmpty()) {
+            rawcode = new NESRawCode(address, value, compare);
+        } else {
+            rawcode = new NESRawCode(address, value);
+        }
+        
+        NESGameGenieCode ggcode = Encoder::encode(*rawcode);
+        ui.gamegenieEdit->setText(ggcode.getCode());
+        
+        delete rawcode;
+    } else if (system == SNES) {
+        SNESRawCode rawcode(address, value);
+        SNESGameGenieCode ggcode = Encoder::encode(rawcode);
+        ui.gamegenieEdit->setText(ggcode.getCode());
+    } else if (system == GENESIS) {
+        GenesisRawCode rawcode(address, value);
+        GenesisGameGenieCode ggcode = Encoder::encode(rawcode);
+        ui.gamegenieEdit->setText(ggcode.getCode());
+    } else if (system == GBGG) {
+        GBGGRawCode *rawcode;
+        
+        if (!ui.compareEdit->text().isEmpty()) {
+            rawcode = new GBGGRawCode(address, value, compare);
+        } else {
+            rawcode = new GBGGRawCode(address, value);
+        }
+        
+        GBGGGameGenieCode ggcode = Encoder::encode(*rawcode);
+        ui.gamegenieEdit->setText(ggcode.getCode());
+        
+        delete rawcode;
+    }
+    
+    encoding = false;
+}
+
+void GenieDialog::reset() {
+    encoding = true;
+    decoding = true;
+    
+    ui.gamegenieEdit->clear();
+    ui.valueEdit->clear();
+    ui.addressEdit->clear();
+    ui.compareEdit->clear();
+    
+    encoding = false;
+    decoding = false;
+}
+
+void GenieDialog::on_addressEdit_textEdited(const QString &) {
+    encode();
+}
+
+void GenieDialog::on_compareEdit_textEdited(const QString &) {
+    encode();
+}
+
 void GenieDialog::on_gamegenieEdit_textEdited(const QString &) {
     decode();
+}
+
+void GenieDialog::on_gbggRadio_toggled(bool checked) {
+    if (checked) {
+        reset();
+        system = GBGG;
+        ui.compareEdit->setEnabled(true);
+        
+        ui.valueEdit->setMaxLength(2);
+        ui.addressEdit->setMaxLength(4);
+        ui.gamegenieEdit->setMaxLength(11);
+        ui.gamegenieEdit->setValidator(gbggValidator);
+    }
+}
+
+void GenieDialog::on_genesisRadio_toggled(bool checked) {
+    if (checked) {
+        reset();
+        system = GENESIS;
+        ui.compareEdit->setEnabled(false);
+        
+        ui.valueEdit->setMaxLength(4);
+        ui.addressEdit->setMaxLength(6);
+        ui.gamegenieEdit->setMaxLength(9);
+        ui.gamegenieEdit->setValidator(genesisValidator);
+    }
+}
+
+void GenieDialog::on_nesRadio_toggled(bool checked) {
+    if (checked) {
+        reset();
+        system = NES;
+        ui.compareEdit->setEnabled(true);
+        
+        ui.valueEdit->setMaxLength(2);
+        ui.addressEdit->setMaxLength(4);
+        ui.gamegenieEdit->setMaxLength(8);
+        ui.gamegenieEdit->setValidator(nesValidator);
+    }
+}
+
+void GenieDialog::on_snesRadio_toggled(bool checked) {
+    if (checked) {
+        reset();
+        system = SNES;
+        ui.compareEdit->setEnabled(false);
+        
+        ui.valueEdit->setMaxLength(2);
+        ui.addressEdit->setMaxLength(6);
+        ui.gamegenieEdit->setMaxLength(9);
+        ui.gamegenieEdit->setValidator(snesValidator);
+    }
+}
+
+void GenieDialog::on_valueEdit_textEdited(const QString &) {
+    encode();
 }
 

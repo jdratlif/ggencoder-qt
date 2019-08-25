@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,9 +20,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: genesisrawcode.cc,v 1.4 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: genesisrawcode.cc,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
 
-#include "genesisrawcode.hh"
+#include "model/genesisrawcode.hh"
 
 using namespace emuWorks;
 

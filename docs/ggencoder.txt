@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 | Game Genie Encoder/Decoder
-| Copyright (C) 2004-2005 emuWorks
+| Copyright (C) 2004-2006 emuWorks
 | http://games.technoplaza.net/
 --------------------------------------------------------------------------------
 
@@ -11,8 +11,9 @@
   - 1.0 Introduction
   - 2.0 Usage
   - 3.0 Building from Source
-  - 4.0 Contact Information
-  - 5.0 License
+  - 4.0 Revision History
+  - 5.0 Contact Information
+  - 6.0 License
 
 --------------------------------------------------------------------------------
 | 1.0 Introduction
@@ -52,7 +53,7 @@
   
   To build the application from source, you will need a few things. First, the
   source code which is available from our website
-  (http://games.technoplaza.net/). You will also need the Qt 4.0 development
+  (http://games.technoplaza.net/). You will also need the Qt 4 development
   libraries. They can be downloaded from http://www.trolltech.com/. Finally,
   a ISO C++ compiler. We use GNU g++.
   
@@ -60,13 +61,24 @@
   
   cd source
   qmake ggencoder.pro
-  uic -o view/ui_maindialog.h view/maindialog.ui
   make
   
   If you have questions, please feel free to contact us.
   
 --------------------------------------------------------------------------------
-| 4.0 Contact Information
+| 4.0 Revision History
+--------------------------------------------------------------------------------
+
+  Version 0.91 (August 19, 2006)
+    - fixed bug that prevented encoding unless you had a partial code
+    - major code cleanup
+    - added Mac OS X binaries
+  
+  Version 0.90 (July 30, 2005)
+    - initial public release
+  
+--------------------------------------------------------------------------------
+| 5.0 Contact Information
 --------------------------------------------------------------------------------
 
   emuWorks is located on the web at http://games.technoplaza.net/. You can
@@ -74,9 +86,10 @@
   webmaster(AT)technoplaza.net (replacing the (AT) with the @ sign).
   
 --------------------------------------------------------------------------------
-| 5.0 License
+| 6.0 License
 --------------------------------------------------------------------------------
 
-  Game Genie Encoder/Decoder is copyright (C) 2004-2005 emuWorks. It is licensed
+  Game Genie Encoder/Decoder is copyright (C) 2004-2006 emuWorks. It is licensed
   under the GNU General Public License. The full text of the license is in
   license.txt. You can learn more at http://www.gnu.org/.
+

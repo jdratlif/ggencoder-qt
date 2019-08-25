@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: comparerawcode.hh,v 1.3 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: comparerawcode.hh,v 1.5 2006/08/18 22:17:24 technoplaza Exp $
 
 #ifndef _COMPARERAWCODE_HH
 #define _COMPARERAWCODE_HH
@@ -30,30 +30,38 @@ namespace emuWorks {
      * A raw code interface with a compare value.
      */
     class CompareRawCode {
+    protected:
+        int compare;
+        
     public:
         /**
          * Checks if this CompareRawCode uses a compare value.
          *
          * @return true if a compare is used; false otherwise.
          */
-        bool hasCompare() { return (compare != -1); }
+        bool hasCompare() const;
     
         /**
          * Gets the compare value of this CompareRawCode.
          *
          * @return The compare value.
          */
-        int getCompare() { return compare; }
+        int getCompare() const;
         
         /**
          * Sets the compare value of this CompareRawCode.
          *
          * @param compare The new compare value.
          */
-        void setCompare(int compare) { this->compare = (compare & 0xFF); }
-    protected:
-        int compare;
+        void setCompare(int compare);
     };
+    
+    inline bool CompareRawCode::hasCompare() const
+        { return (compare != -1); }
+    inline int CompareRawCode::getCompare() const
+        { return compare; }
+    inline void CompareRawCode::setCompare(int compare)
+        { this->compare = (compare & 0xFF); };
 }
 
 #endif

@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,143 +20,67 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: encoder.cc,v 1.3 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: encoder.cc,v 1.6 2006/08/18 22:17:24 technoplaza Exp $
 
-#include "encoder.hh"
+#include "model/gbgggamegeniecode.hh"
+#include "model/gbggrawcode.hh"
+#include "model/genesisgamegeniecode.hh"
+#include "model/genesisrawcode.hh"
+#include "model/nesgamegeniecode.hh"
+#include "model/nesrawcode.hh"
+#include "model/snesgamegeniecode.hh"
+#include "model/snesrawcode.hh"
 
-#include "../model/nesgamegeniecode.hh"
-#include "../model/nesrawcode.hh"
-#include "../model/snesgamegeniecode.hh"
-#include "../model/snesrawcode.hh"
-#include "../model/genesisgamegeniecode.hh"
-#include "../model/genesisrawcode.hh"
-#include "../model/gbgggamegeniecode.hh"
-#include "../model/gbggrawcode.hh"
+#include "tools/encoder.hh"
 
 using namespace emuWorks;
 
-NESGameGenieCode Encoder::encode(NESRawCode &code) {
-    int genie;
-    int temp = 0;
-    int value = code.getValue();
-    int address = code.getAddress();
+GBGGGameGenieCode Encoder::encode(const GBGGRawCode &code) {
+    int temp, address = code.getAddress(), value = code.getValue();
+    qint64 genie;
     
-    // position 1678
-    genie = ((value & 0x80) >> 4) | (value & 0x7);
+    // start with the value
+    genie = value;
     
-    // position H234
-    temp = ((address & 0x80) >> 4) | ((value & 0x70) >> 4);
-    genie <<= 4;
-    genie |= temp;
-    
-    // position -IJK
-    temp = (address & 0x70) >> 4;
-    
-    if (code.hasCompare()) {
-        temp |= 0x8;
-    }
-    
-    genie <<= 4;
-    genie |= temp;
-    
-    // position LABC
-    temp = (address & 0x8) | ((address & 0x7000) >> 12);
-    genie <<= 4;
-    genie |= temp;
-    
-    // position DMNO
-    temp = ((address & 0x800) >> 8) | (address & 0x7);
-    genie <<= 4;
+    temp = (address & 0xF000) >> 12;
+    temp = (~temp & 0xF);
+    temp |= (address & 0xFFF) << 4;
+    genie <<= 16;
     genie |= temp;
     
     if (code.hasCompare()) {
         int compare = code.getCompare();
         
-        // position eEFG
-        temp = (compare & 0x8) | ((address & 0x700) >> 8);
+        compare ^= 0xBA;
+        compare = (compare << 2) | (compare >> 6);
+        temp = (compare & 0xF0) >> 4;
         genie <<= 4;
         genie |= temp;
         
-        // position afgh
-        temp = ((compare & 0x80) >> 4) | (compare & 0x7);
+        temp ^= 8;
         genie <<= 4;
         genie |= temp;
         
-        // position 5bcd
-        temp = (value & 0x8) | ((compare & 0x70) >> 4);
-        genie <<= 4;
-        genie |= temp;
-    } else {
-        // position 5EFG
-        temp = (value & 0x8) | ((address & 0x700) >> 8);
+        temp = (compare & 0xF);
         genie <<= 4;
         genie |= temp;
     }
     
     QString ggcode;
-    const char *alphabet = NESGameGenieCode::ALPHABET;
+    const char *alphabet = GBGGGameGenieCode::ALPHABET;
     
-    for (int i = 0; i < (code.hasCompare() ? 8 : 6); i++) {
-        ggcode.insert(0, alphabet[(genie >> (i * 4)) & 0xF]);
-    }
-    
-    return NESGameGenieCode::create(ggcode);
-}
-
-SNESGameGenieCode Encoder::encode(SNESRawCode &code) {
-    int genie;
-    int temp;
-    int value = code.getValue();
-    int address = code.getAddress();
-    
-    // position 1-8
-    genie = value;
-    
-    // position IJKL
-    temp = (address & 0xF000) >> 12;
-    genie <<= 4;
-    genie |= temp;
-    
-    // position QRST
-    temp = (address & 0xF0) >> 4;
-    genie <<= 4;
-    genie |= temp;
-    
-    // position OPAB
-    temp = ((address & 0x300) >> 6) | (address >> 22);
-    genie <<= 4;
-    genie |= temp;
-    
-    // position CDUV
-    temp = ((address & 0x300000) >> 18) | ((address & 0xC) >> 2);
-    genie <<= 4;
-    genie |= temp;
-    
-    // position WXEF
-    temp = ((address & 0x3) << 2) | ((address & 0xC0000) >> 18);
-    genie <<= 4;
-    genie |= temp;
-    
-    // position GHMN
-    temp = ((address & 0x30000) >> 14) | ((address & 0xC00) >> 10);
-    genie <<= 4;
-    genie |= temp;
-    
-    QString ggcode;
-    const char *alphabet = SNESGameGenieCode::ALPHABET;
-    
-    for (int i = 0; i < 8; i++) {
-        if (i == 4) {
+    for (int i = 0; i < (code.hasCompare() ? 9 : 6); i++) {
+        if ((i == 3) || (i == 6)) {
             ggcode.insert(0, '-');
         }
         
-        ggcode.insert(0, alphabet[(genie >> (i * 4)) & 0xF]);
+        ggcode.insert(0, alphabet[(int)((genie >> (i * 4)) & 0xF)]);
     }
     
-    return SNESGameGenieCode::create(ggcode);
+    return GBGGGameGenieCode::create(ggcode);
 }
 
-GenesisGameGenieCode Encoder::encode(GenesisRawCode &code) {
+GenesisGameGenieCode Encoder::encode(const GenesisRawCode &code) {
     int temp;
     qint64 genie;
     int value = code.getValue();
@@ -224,48 +148,124 @@ GenesisGameGenieCode Encoder::encode(GenesisRawCode &code) {
     return GenesisGameGenieCode::create(ggcode);
 }
 
-GBGGGameGenieCode Encoder::encode(GBGGRawCode &code) {
-    int temp, address = code.getAddress(), value = code.getValue();
-    qint64 genie;
+NESGameGenieCode Encoder::encode(const NESRawCode &code) {
+    int genie;
+    int temp = 0;
+    int value = code.getValue();
+    int address = code.getAddress();
     
-    // start with the value
-    genie = value;
+    // position 1678
+    genie = ((value & 0x80) >> 4) | (value & 0x7);
     
-    temp = (address & 0xF000) >> 12;
-    temp = (~temp & 0xF);
-    temp |= (address & 0xFFF) << 4;
-    genie <<= 16;
+    // position H234
+    temp = ((address & 0x80) >> 4) | ((value & 0x70) >> 4);
+    genie <<= 4;
+    genie |= temp;
+    
+    // position -IJK
+    temp = (address & 0x70) >> 4;
+    
+    if (code.hasCompare()) {
+        temp |= 0x8;
+    }
+    
+    genie <<= 4;
+    genie |= temp;
+    
+    // position LABC
+    temp = (address & 0x8) | ((address & 0x7000) >> 12);
+    genie <<= 4;
+    genie |= temp;
+    
+    // position DMNO
+    temp = ((address & 0x800) >> 8) | (address & 0x7);
+    genie <<= 4;
     genie |= temp;
     
     if (code.hasCompare()) {
         int compare = code.getCompare();
         
-        compare ^= 0xBA;
-        compare = (compare << 2) | (compare >> 6);
-        temp = (compare & 0xF0) >> 4;
+        // position eEFG
+        temp = (compare & 0x8) | ((address & 0x700) >> 8);
         genie <<= 4;
         genie |= temp;
         
-        temp ^= 8;
+        // position afgh
+        temp = ((compare & 0x80) >> 4) | (compare & 0x7);
         genie <<= 4;
         genie |= temp;
         
-        temp = (compare & 0xF);
+        // position 5bcd
+        temp = (value & 0x8) | ((compare & 0x70) >> 4);
+        genie <<= 4;
+        genie |= temp;
+    } else {
+        // position 5EFG
+        temp = (value & 0x8) | ((address & 0x700) >> 8);
         genie <<= 4;
         genie |= temp;
     }
     
     QString ggcode;
-    const char *alphabet = GBGGGameGenieCode::ALPHABET;
+    const char *alphabet = NESGameGenieCode::ALPHABET;
     
-    for (int i = 0; i < (code.hasCompare() ? 9 : 6); i++) {
-        if ((i == 3) || (i == 6)) {
+    for (int i = 0; i < (code.hasCompare() ? 8 : 6); i++) {
+        ggcode.insert(0, alphabet[(genie >> (i * 4)) & 0xF]);
+    }
+    
+    return NESGameGenieCode::create(ggcode);
+}
+
+SNESGameGenieCode Encoder::encode(const SNESRawCode &code) {
+    int genie;
+    int temp;
+    int value = code.getValue();
+    int address = code.getAddress();
+    
+    // position 1-8
+    genie = value;
+    
+    // position IJKL
+    temp = (address & 0xF000) >> 12;
+    genie <<= 4;
+    genie |= temp;
+    
+    // position QRST
+    temp = (address & 0xF0) >> 4;
+    genie <<= 4;
+    genie |= temp;
+    
+    // position OPAB
+    temp = ((address & 0x300) >> 6) | (address >> 22);
+    genie <<= 4;
+    genie |= temp;
+    
+    // position CDUV
+    temp = ((address & 0x300000) >> 18) | ((address & 0xC) >> 2);
+    genie <<= 4;
+    genie |= temp;
+    
+    // position WXEF
+    temp = ((address & 0x3) << 2) | ((address & 0xC0000) >> 18);
+    genie <<= 4;
+    genie |= temp;
+    
+    // position GHMN
+    temp = ((address & 0x30000) >> 14) | ((address & 0xC00) >> 10);
+    genie <<= 4;
+    genie |= temp;
+    
+    QString ggcode;
+    const char *alphabet = SNESGameGenieCode::ALPHABET;
+    
+    for (int i = 0; i < 8; i++) {
+        if (i == 4) {
             ggcode.insert(0, '-');
         }
         
-        ggcode.insert(0, alphabet[(int)((genie >> (i * 4)) & 0xF)]);
+        ggcode.insert(0, alphabet[(genie >> (i * 4)) & 0xF]);
     }
     
-    return GBGGGameGenieCode::create(ggcode);
+    return SNESGameGenieCode::create(ggcode);
 }
 

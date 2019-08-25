@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,24 +20,129 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: decoder.cc,v 1.5 2005/07/30 04:31:38 technoplaza Exp $
+// $Id: decoder.cc,v 1.8 2006/08/18 22:17:24 technoplaza Exp $
 
 #include <QString>
 
-#include "decoder.hh"
-#include "../model/nesgamegeniecode.hh"
-#include "../model/nesrawcode.hh"
-#include "../model/snesgamegeniecode.hh"
-#include "../model/snesrawcode.hh"
-#include "../model/genesisgamegeniecode.hh"
-#include "../model/genesisrawcode.hh"
-#include "../model/gbgggamegeniecode.hh"
-#include "../model/gbggrawcode.hh"
-#include "../exceptions/invalidgamegeniecode.hh"
+#include "exceptions/invalidgamegeniecode.hh"
+
+#include "model/gbgggamegeniecode.hh"
+#include "model/gbggrawcode.hh"
+#include "model/genesisgamegeniecode.hh"
+#include "model/genesisrawcode.hh"
+#include "model/nesgamegeniecode.hh"
+#include "model/nesrawcode.hh"
+#include "model/snesgamegeniecode.hh"
+#include "model/snesrawcode.hh"
+
+#include "tools/decoder.hh"
 
 using namespace emuWorks;
 
-NESRawCode Decoder::decodeNES(GameGenieCode &code) {
+GBGGRawCode Decoder::decodeGBGG(const GameGenieCode &code) {
+    QString ggcode = code.getCode();
+    int length = ggcode.length();
+    
+    if (!GBGGGameGenieCode::isValidCode(ggcode)) {
+        throw InvalidGameGenieCodeException();
+    }
+    
+    qint64 bitstring = 0;
+    
+    for (int i = 0; i < length; i++) {
+        if ((i == 3) || (i == 7)) {
+            continue;
+        }
+        
+        QChar ch = ggcode[i];
+        
+        bitstring <<= 4;
+        bitstring |= code.toHex(ch.toAscii());
+    }
+    
+    int value;
+    int address;
+    int temp;
+    
+    if (length == 7) {
+        bitstring <<= 12;
+    }
+    
+    value = (int)(bitstring >> 28);
+    
+    temp = (int)((bitstring >> 12) & 0xF);
+    temp = (~temp & 0xF) << 12;
+    address = (int)((bitstring >> 16) & 0xFFF) | temp;
+    
+    if (length == 7) {
+        return GBGGRawCode(address, value);
+    }
+    
+    temp = (int)(((bitstring >> 4) & 0xF0) | (bitstring & 0xF));
+    temp = (temp >> 2) | ((temp << 6) & 0xFC);
+    
+    int compare = temp ^ 0xBA;
+    
+    return GBGGRawCode(address, value, compare);
+}
+
+GenesisRawCode Decoder::decodeGenesis(const GameGenieCode &code) {
+    QString ggcode = code.getCode();
+    int length = ggcode.length();
+    
+    if (!GenesisGameGenieCode::isValidCode(ggcode)) {
+        throw InvalidGameGenieCodeException();
+    }
+    
+    qint64 bitstring = 0;
+    
+    for (int i = 0; i < length; i++) {
+        if (i == 4) {
+            continue;
+        }
+        
+        QChar ch = ggcode[i];
+        
+        bitstring <<= 5;
+        bitstring |= code.toHex(ch.toAscii());
+    }
+    
+    int value;
+    int address;
+    int temp;
+    
+    // position abcd
+    value = (int)(((bitstring >> 7) & 0xE) | ((bitstring >> 15) & 0x1));
+    
+    // position efgh
+    temp = (int)(((bitstring >> 11) & 0xE) | ((bitstring >> 11) & 0x1));
+    value <<= 4;
+    value |= temp;
+    
+    // position ijklmnop
+    temp = (int)(bitstring >> 32);
+    value <<= 8;
+    value |= temp;
+    
+    // a-p = value, a-x = addy
+    // ijkl mnop IJKL MNOP ABCD EFGH defg habc QRST UVWX
+    // position ABCDEFGH
+    address = (int)((bitstring >> 16) & 0xFF);
+    
+    // position IJKLMNOP
+    temp = (int)((bitstring >> 24) & 0xFF);
+    address <<= 8;
+    address |= temp;
+    
+    // position QRSTUVWX
+    temp = (int)(bitstring & 0xFF);
+    address <<= 8;
+    address |= temp;
+    
+    return GenesisRawCode(address, value);
+}
+
+NESRawCode Decoder::decodeNES(const GameGenieCode &code) {
     QString ggcode = code.getCode();
     int length = ggcode.length();
     
@@ -111,7 +216,7 @@ NESRawCode Decoder::decodeNES(GameGenieCode &code) {
     return NESRawCode(address, value, compare);
 }
 
-SNESRawCode Decoder::decodeSNES(GameGenieCode &code) {
+SNESRawCode Decoder::decodeSNES(const GameGenieCode &code) {
     QString ggcode = code.getCode();
     int length = ggcode.length();
     
@@ -168,108 +273,5 @@ SNESRawCode Decoder::decodeSNES(GameGenieCode &code) {
     address |= temp;
     
     return SNESRawCode(address, value);
-}
-
-GenesisRawCode Decoder::decodeGenesis(GameGenieCode &code) {
-    QString ggcode = code.getCode();
-    int length = ggcode.length();
-    
-    if (!GenesisGameGenieCode::isValidCode(ggcode)) {
-        throw InvalidGameGenieCodeException();
-    }
-    
-    qint64 bitstring = 0;
-    
-    for (int i = 0; i < length; i++) {
-        if (i == 4) {
-            continue;
-        }
-        
-        QChar ch = ggcode[i];
-        
-        bitstring <<= 5;
-        bitstring |= code.toHex(ch.toAscii());
-    }
-    
-    int value;
-    int address;
-    int temp;
-    
-    // position abcd
-    value = (int)(((bitstring >> 7) & 0xE) | ((bitstring >> 15) & 0x1));
-    
-    // position efgh
-    temp = (int)(((bitstring >> 11) & 0xE) | ((bitstring >> 11) & 0x1));
-    value <<= 4;
-    value |= temp;
-    
-    // position ijklmnop
-    temp = (int)(bitstring >> 32);
-    value <<= 8;
-    value |= temp;
-    
-    // a-p = value, a-x = addy
-    // ijkl mnop IJKL MNOP ABCD EFGH defg habc QRST UVWX
-    // position ABCDEFGH
-    address = (int)((bitstring >> 16) & 0xFF);
-    
-    // position IJKLMNOP
-    temp = (int)((bitstring >> 24) & 0xFF);
-    address <<= 8;
-    address |= temp;
-    
-    // position QRSTUVWX
-    temp = (int)(bitstring & 0xFF);
-    address <<= 8;
-    address |= temp;
-    
-    return GenesisRawCode(address, value);
-}
-
-GBGGRawCode Decoder::decodeGBGG(GameGenieCode &code) {
-    QString ggcode = code.getCode();
-    int length = ggcode.length();
-    
-    if (!GBGGGameGenieCode::isValidCode(ggcode)) {
-        throw InvalidGameGenieCodeException();
-    }
-    
-    qint64 bitstring = 0;
-    
-    for (int i = 0; i < length; i++) {
-        if ((i == 3) || (i == 7)) {
-            continue;
-        }
-        
-        QChar ch = ggcode[i];
-        
-        bitstring <<= 4;
-        bitstring |= code.toHex(ch.toAscii());
-    }
-    
-    int value;
-    int address;
-    int temp;
-    
-    if (length == 7) {
-        bitstring <<= 12;
-    }
-    
-    value = (int)(bitstring >> 28);
-    
-    temp = (int)((bitstring >> 12) & 0xF);
-    temp = (~temp & 0xF) << 12;
-    address = (int)((bitstring >> 16) & 0xFFF) | temp;
-    
-    if (length == 7) {
-        return GBGGRawCode(address, value);
-    }
-    
-    temp = (int)(((bitstring >> 4) & 0xF0) | (bitstring & 0xF));
-    temp = (temp >> 2) | ((temp << 6) & 0xFC);
-    
-    int compare = temp ^ 0xBA;
-    
-    return GBGGRawCode(address, value, compare);
 }
 

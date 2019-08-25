@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,18 +20,20 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: geniedialog.hh,v 1.3 2005/07/30 04:55:29 technoplaza Exp $
+// $Id: geniedialog.hh,v 1.6 2006/08/19 15:43:05 technoplaza Exp $
 
 #ifndef _GENIEDIALOG_HH
 #define _GENIEDIALOG_HH
 
 #include <QDialog>
+#include <QRegExpValidator>
 
 #include "ui_maindialog.h"
 
-class QRegExpValidator;
-
 namespace emuWorks {
+    /**
+     * The main dialog for the application.
+     */
     class GenieDialog : public QDialog {
         Q_OBJECT
         
@@ -43,12 +45,13 @@ namespace emuWorks {
         QRegExpValidator *gbggValidator;
         Ui::MainDialog ui;
         int system;
-        bool encoding, decoding;        
+        bool encoding, decoding;
         
         /**
-         * Resets the controls.
+         * Decodes the game genie code into value, address, and compare
+         * components.
          */
-        void reset();
+        void decode();
         
         /**
          * Encodes the value, address, and compare into a game genie code.
@@ -56,10 +59,10 @@ namespace emuWorks {
         void encode();
         
         /**
-         * Decodes the game genie code into value, address, and compare
-         * components.
+         * Resets the controls.
          */
-        void decode();
+        void reset();
+        
     public:
         /**
          * Creates a new GenieDialog.
@@ -70,42 +73,8 @@ namespace emuWorks {
          * Destructor for a GenieDialog.
          */
         ~GenieDialog();
+        
     private slots:
-        /**
-         * Called when the NES radio button is toggled.
-         *
-         * @param checked true if it was checked; false otherwise
-         */
-        void on_nesRadio_toggled(bool checked);
-        
-        /**
-         * Called when the SNES radio button is toggled.
-         *
-         * @param checked true if it was checked; false otherwise
-         */
-        void on_snesRadio_toggled(bool checked);
-        
-        /**
-         * Called when the Genesis radio button is toggled.
-         *
-         * @param checked true if it was checked; false otherwise
-         */
-        void on_genesisRadio_toggled(bool checked);
-        
-        /**
-         * Called when the Game Boy / Game Gear radio button is toggled.
-         *
-         * @param checked true if it was checked; false otherwise
-         */
-        void on_gbggRadio_toggled(bool checked);
-        
-        /**
-         * Called when the value box is edited.
-         *
-         * @param text The new text.
-         */
-        void on_valueEdit_textEdited(const QString &text);
-        
         /**
          * Called when the address box is edited.
          * 
@@ -126,6 +95,41 @@ namespace emuWorks {
          * @param text The new text.
          */
         void on_gamegenieEdit_textEdited(const QString &text);
+        
+        /**
+         * Called when the Game Boy / Game Gear radio button is toggled.
+         *
+         * @param checked true if it was checked; false otherwise
+         */
+        void on_gbggRadio_toggled(bool checked);
+        
+        /**
+         * Called when the Genesis radio button is toggled.
+         *
+         * @param checked true if it was checked; false otherwise
+         */
+        void on_genesisRadio_toggled(bool checked);
+        
+        /**
+         * Called when the NES radio button is toggled.
+         *
+         * @param checked true if it was checked; false otherwise
+         */
+        void on_nesRadio_toggled(bool checked);
+        
+        /**
+         * Called when the SNES radio button is toggled.
+         *
+         * @param checked true if it was checked; false otherwise
+         */
+        void on_snesRadio_toggled(bool checked);
+
+        /**
+         * Called when the value box is edited.
+         *
+         * @param text The new text.
+         */
+        void on_valueEdit_textEdited(const QString &text);
     };
 }
 

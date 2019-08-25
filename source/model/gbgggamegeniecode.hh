@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,27 +20,46 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: gbgggamegeniecode.hh,v 1.3 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: gbgggamegeniecode.hh,v 1.6 2006/08/18 22:17:24 technoplaza Exp $
 
 #ifndef _GBGGGAMEGENIECODE_HH
 #define _GBGGGAMEGENIECODE_HH
 
-#include "gamegeniecode.hh"
+#include "exceptions/invalidgamegeniecode.hh"
+
+#include "model/gamegeniecode.hh"
 
 namespace emuWorks {
     /**
      * An implementation of a Game Boy or Game Gear game genie code.
      */
     class GBGGGameGenieCode : public GameGenieCode {
+    private:
+        /**
+         * Constructor for an GBGGGameGenieCode.
+         */
+        GBGGGameGenieCode(const QString &code);
+        
     public:
+        /// The game genie alphabet.
+        static const char ALPHABET[];
+    
         /**
          * Creates a GBGGGameGenieCode object.
          *
          * @param code The game genie code string.
          *
-         * @throws InvalidGameGenieCode if the code is invalid.
+         * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static GBGGGameGenieCode create(QString &code);
+        static GBGGGameGenieCode create(const QString &code)
+            throw(InvalidGameGenieCodeException);
+            
+        /**
+         * Gets the game genie alphabet.
+         *
+         * @return The genie alphabet array.
+         */
+        const char *getAlphabet() const;
     
         /**
          * Checks if the code is a valid game genie code.
@@ -49,25 +68,11 @@ namespace emuWorks {
          *
          * @return true if valid; false otherwise.
          */
-        static bool isValidCode(QString &code);
-        
-        /**
-         * Gets the game genie alphabet.
-         *
-         * @return The genie alphabet array.
-         */
-        const char *getAlphabet();
-        
-        /**
-         * The game genie alphabet.
-         */
-        static const char ALPHABET[];
-    private:
-        /**
-         * Constructor for an GBGGGameGenieCode.
-         */
-        GBGGGameGenieCode(QString &code) { setCode(code); }
+        static bool isValidCode(const QString &code);
     };
+    
+    inline GBGGGameGenieCode::GBGGGameGenieCode(const QString &code)
+        { setCode(code); }
 }
 
 #endif

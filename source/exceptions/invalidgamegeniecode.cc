@@ -20,17 +20,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: system.hh,v 1.5 2006/08/19 15:43:05 technoplaza Exp $
+// $Id: invalidgamegeniecode.cc,v 1.2 2006/08/18 22:17:24 technoplaza Exp $
 
-#ifndef _SYSTEM_HH
-#define _SYSTEM_HH
+#include "exceptions/invalidgamegeniecode.hh"
 
-/// The namespace for all application members
-namespace emuWorks {
-    enum System {
-        NES, SNES, GENESIS, GBGG
-    };
-}
-
-#endif
+using namespace emuWorks;
 

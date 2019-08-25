@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,28 +20,54 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: genesisgamegeniecode.hh,v 1.4 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: genesisgamegeniecode.hh,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
 
 #ifndef _GENESISGAMEGENIECODE_HH
 #define _GENESISGAMEGENIECODE_HH
 
-#include "gamegeniecode.hh"
+#include "exceptions/invalidgamegeniecode.hh"
+
+#include "model/gamegeniecode.hh"
 
 namespace emuWorks {
     /**
      * An implementation of a Genesis game genie code.
      */
     class GenesisGameGenieCode : public GameGenieCode {
+    private:
+        /**
+         * Constructor for an GenesisGameGenieCode.
+         */
+        GenesisGameGenieCode(const QString &code);
+        
     public:
+        /// The game genie alphabet.
+        static const char ALPHABET[];
+        
         /**
          * Creates a GenesisGameGenieCode object.
          *
          * @param code The game genie code string.
          *
-         * @throws InvalidGameGenieCode if the code is invalid.
+         * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static GenesisGameGenieCode create(QString &code);
-    
+        static GenesisGameGenieCode create(const QString &code)
+            throw (InvalidGameGenieCodeException);
+        
+        /**
+         * Gets the game genie alphabet.
+         *
+         * @return The genie alphabet array.
+         */
+        const char *getAlphabet() const;
+        
+        /**
+         * Gets the number of letters in the game genie alphabet.
+         *
+         * @return The alphabet letter count.
+         */
+        int getAlphabetCount() const;
+        
         /**
          * Checks if the code is a valid game genie code.
          *
@@ -49,32 +75,13 @@ namespace emuWorks {
          *
          * @return true if valid; false otherwise.
          */
-        static bool isValidCode(QString &code);
-        
-        /**
-         * Gets the game genie alphabet.
-         *
-         * @return The genie alphabet array.
-         */
-        const char *getAlphabet();
-        
-        /**
-         * Gets the number of letters in the game genie alphabet.
-         *
-         * @return The alphabet letter count.
-         */
-        int getAlphabetCount() { return 32; } 
-        
-        /**
-         * The game genie alphabet.
-         */
-        static const char ALPHABET[];
-    private:
-        /**
-         * Constructor for an GenesisGameGenieCode.
-         */
-        GenesisGameGenieCode(QString &code) { setCode(code); }
+        static bool isValidCode(const QString &code);
     };
+    
+    inline GenesisGameGenieCode::GenesisGameGenieCode(const QString &code)
+        { setCode(code); }
+    inline int GenesisGameGenieCode::getAlphabetCount() const
+        { return 32; } 
 }
 
 #endif

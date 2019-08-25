@@ -9,11 +9,11 @@
     <x>0</x>
     <y>0</y>
     <width>322</width>
-    <height>252</height>
+    <height>260</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Game Genie Encoder/Decoder 0.90</string>
+   <string>Game Genie Encoder/Decoder 0.91</string>
   </property>
   <layout class="QVBoxLayout" >
    <property name="margin" >
@@ -41,7 +41,7 @@
         </sizepolicy>
        </property>
        <property name="text" >
-        <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Game Genie Encoder/Decoder 0.90&lt;/p>&lt;/body>&lt;/html></string>
+        <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;/head>&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:MS Shell Dlg;">Game Genie Encoder/Decoder 0.91&lt;/p>&lt;/body>&lt;/html></string>
        </property>
        <property name="alignment" >
         <set>Qt::AlignCenter</set>
@@ -59,7 +59,7 @@
         </sizepolicy>
        </property>
        <property name="text" >
-        <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; color:#000000;&quot;>Copyright (C) 2005 emuWorks&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+        <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;/head>&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg 2; font-size:8.25pt; font-weight:400; font-style:normal; text-decoration:none;">&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:MS Shell Dlg;">&lt;span style=" color:#000000;">Copyright (C) 2005-2006 emuWorks&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
        </property>
        <property name="alignment" >
         <set>Qt::AlignCenter</set>
@@ -77,7 +77,7 @@
         </sizepolicy>
        </property>
        <property name="text" >
-        <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:MS Shell Dlg; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>http://games.technoplaza.net/&lt;/p>&lt;/body>&lt;/html></string>
+        <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;/head>&lt;body style=" white-space: pre-wrap; font-family:MS Shell Dlg; font-weight:400; font-style:normal; text-decoration:none;">&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">http://games.technoplaza.net/&lt;/p>&lt;/body>&lt;/html></string>
        </property>
        <property name="alignment" >
         <set>Qt::AlignCenter</set>
@@ -470,16 +470,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QWidget" name="widget_4" >
-   <property name="geometry" >
-    <rect>
-     <x>9</x>
-     <y>71</y>
-     <width>359</width>
-     <height>46</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QWidget" name="widget_5" >
    <property name="geometry" >
     <rect>
@@ -560,6 +550,16 @@
     </rect>
    </property>
   </widget>
+  <widget class="QWidget" name="widget_4" >
+   <property name="geometry" >
+    <rect>
+     <x>9</x>
+     <y>71</y>
+     <width>359</width>
+     <height>46</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11" />
  <pixmapfunction>qPixmapFromMimeSource</pixmapfunction>
@@ -573,7 +573,6 @@
   <tabstop>compareEdit</tabstop>
   <tabstop>gamegenieEdit</tabstop>
  </tabstops>
- <includes/>
  <resources/>
  <connections/>
 </ui>

@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,10 +20,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: gbgggamegeniecode.cc,v 1.4 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: gbgggamegeniecode.cc,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
 
-#include "gbgggamegeniecode.hh"
-#include "../exceptions/invalidgamegeniecode.hh"
+#include "model/gbgggamegeniecode.hh"
 
 using namespace emuWorks;
 
@@ -32,7 +31,8 @@ const char GBGGGameGenieCode::ALPHABET[] = {
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
 };
 
-GBGGGameGenieCode GBGGGameGenieCode::create(QString &code) {
+GBGGGameGenieCode GBGGGameGenieCode::create(const QString &code)
+    throw(InvalidGameGenieCodeException) {
     if (isValidCode(code)) {
         return GBGGGameGenieCode(code);
     }
@@ -40,7 +40,11 @@ GBGGGameGenieCode GBGGGameGenieCode::create(QString &code) {
     throw InvalidGameGenieCodeException();
 }
 
-bool GBGGGameGenieCode::isValidCode(QString &code) {
+const char *GBGGGameGenieCode::getAlphabet() const {
+    return ALPHABET;
+}
+
+bool GBGGGameGenieCode::isValidCode(const QString &code) {
     GBGGGameGenieCode temp(code);
     
     const char *alphabet = temp.getAlphabet();
@@ -85,9 +89,5 @@ bool GBGGGameGenieCode::isValidCode(QString &code) {
     }
     
     return true;
-}
-
-const char *GBGGGameGenieCode::getAlphabet() {
-    return ALPHABET;
 }
 

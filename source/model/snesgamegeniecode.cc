@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,10 +20,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: snesgamegeniecode.cc,v 1.4 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: snesgamegeniecode.cc,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
 
-#include "snesgamegeniecode.hh"
-#include "../exceptions/invalidgamegeniecode.hh"
+#include "model/snesgamegeniecode.hh"
 
 using namespace emuWorks;
 
@@ -32,7 +31,8 @@ const char SNESGameGenieCode::ALPHABET[] = {
     '6', 'B', 'C', '8', 'A', '2', '3', 'E'
 };
 
-SNESGameGenieCode SNESGameGenieCode::create(QString &code) {
+SNESGameGenieCode SNESGameGenieCode::create(const QString &code) 
+    throw(InvalidGameGenieCodeException) {
     if (isValidCode(code)) {
         return SNESGameGenieCode(code);
     }
@@ -40,7 +40,11 @@ SNESGameGenieCode SNESGameGenieCode::create(QString &code) {
     throw InvalidGameGenieCodeException();
 }
 
-bool SNESGameGenieCode::isValidCode(QString &code) {
+const char *SNESGameGenieCode::getAlphabet() const {
+    return ALPHABET;
+}
+
+bool SNESGameGenieCode::isValidCode(const QString &code) {
     SNESGameGenieCode temp(code);
     
     const char *alphabet = temp.getAlphabet();
@@ -79,9 +83,5 @@ bool SNESGameGenieCode::isValidCode(QString &code) {
     }
     
     return true;
-}
-
-const char *SNESGameGenieCode::getAlphabet() {
-    return ALPHABET;
 }
 

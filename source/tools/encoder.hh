@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,43 +20,40 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: encoder.hh,v 1.2 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: encoder.hh,v 1.4 2006/08/18 22:17:24 technoplaza Exp $
 
 #ifndef _ENCODER_HH
 #define _ENCODER_HH
 
 namespace emuWorks {
+    class GBGGGameGenieCode;
+    class GBGGRawCode;
+    class GenesisGameGenieCode;
+    class GenesisRawCode;
     class NESGameGenieCode;
     class NESRawCode;
     class SNESGameGenieCode;
     class SNESRawCode;
-    class GenesisGameGenieCode;
-    class GenesisRawCode;
-    class GBGGGameGenieCode;
-    class GBGGRawCode;
     
     /**
      * A class to encode raw/PAR codes into Game Genie codes.
      */
     class Encoder {
+    private:
+        /**
+         * Constructor for an Encoder. Private to prevent instantiation.
+         */
+        Encoder();
+        
     public:
         /**
-         * Encodes an NESRawCode into a GameGenieCode.
+         * Encodes a GBGGRawCode into a GameGenieCode.
          *
-         * @param code The NESRawCode.
-         *
-         * @return The encoded GameGenieCode.
-         */
-        static NESGameGenieCode encode(NESRawCode &code);
-
-        /**
-         * Encodes an SNESRawCode into a GameGenieCode.
-         *
-         * @param code The SNESRawCode.
+         * @param code The GBGGRawCode.
          *
          * @return The encoded GameGenieCode.
          */
-        static SNESGameGenieCode encode(SNESRawCode &code);
+        static GBGGGameGenieCode encode(const GBGGRawCode &code);
         
         /**
          * Encodes a GenesisRawCode into a GameGenieCode.
@@ -65,22 +62,28 @@ namespace emuWorks {
          *
          * @return The encoded GameGenieCode.
          */
-        static GenesisGameGenieCode encode(GenesisRawCode &code);
+        static GenesisGameGenieCode encode(const GenesisRawCode &code);
         
         /**
-         * Encodes a GBGGRawCode into a GameGenieCode.
+         * Encodes an NESRawCode into a GameGenieCode.
          *
-         * @param code The GBGGRawCode.
+         * @param code The NESRawCode.
          *
          * @return The encoded GameGenieCode.
          */
-        static GBGGGameGenieCode encode(GBGGRawCode &code);
-    private:
+        static NESGameGenieCode encode(const NESRawCode &code);
+
         /**
-         * Constructor for an Encoder. Private to prevent instantiation.
+         * Encodes an SNESRawCode into a GameGenieCode.
+         *
+         * @param code The SNESRawCode.
+         *
+         * @return The encoded GameGenieCode.
          */
-        Encoder() {}
+        static SNESGameGenieCode encode(const SNESRawCode &code);
     };
+    
+    inline Encoder::Encoder() {}
 }
 
 #endif

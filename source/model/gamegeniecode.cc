@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2005 emuWorks
+ * Copyright (C) 2004-2006 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,15 +20,15 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: gamegeniecode.cc,v 1.3 2005/07/30 02:36:45 technoplaza Exp $
+// $Id: gamegeniecode.cc,v 1.6 2006/08/18 22:17:24 technoplaza Exp $
 
 #include <cctype>
 
-#include "gamegeniecode.hh"
+#include "model/gamegeniecode.hh"
 
 using namespace emuWorks;
 
-int GameGenieCode::toHex(char letter) {
+int GameGenieCode::toHex(char letter) const {
     letter = toupper(letter);
     
     const char *alphabet = getAlphabet();

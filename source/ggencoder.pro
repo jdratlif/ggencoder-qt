@@ -1,6 +1,7 @@
 TEMPLATE = app
 DEPENDPATH += . exceptions model tools view
 INCLUDEPATH += .
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.2
 
 # Input
 HEADERS += exceptions/invalidgamegeniecode.hh \
@@ -23,6 +24,8 @@ HEADERS += exceptions/invalidgamegeniecode.hh \
 FORMS += view/maindialog.ui
 
 SOURCES += ggencoder.cc \
+           exceptions/invalidgamegeniecode.cc \
+           model/comparerawcode.cc \
            model/gamegeniecode.cc \
            model/gbgggamegeniecode.cc \
            model/gbggrawcode.cc \
@@ -30,6 +33,7 @@ SOURCES += ggencoder.cc \
            model/genesisrawcode.cc \
            model/nesgamegeniecode.cc \
            model/nesrawcode.cc \
+           model/rawcode.cc \
            model/snesgamegeniecode.cc \
            model/snesrawcode.cc \
            tools/decoder.cc \
