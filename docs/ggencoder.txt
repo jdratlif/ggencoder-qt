@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
-| Game Genie Encoder/Decoder
-| Copyright (C) 2004-2006 emuWorks
+| ggencoder 0.91a - Game Genie Encoder/Decoder
+| Copyright (C) 2004-2006,2008 emuWorks
 | http://games.technoplaza.net/
 --------------------------------------------------------------------------------
 
@@ -48,33 +48,32 @@
 | 3.0 Building from Source
 --------------------------------------------------------------------------------
 
-  Game Genie Encoder/Decoder is free software under the GNU General Public
-  License.
+  Binaries are available for Windows (2000 and later), Linux, and Mac OS X
+  (Tiger or later). The source is also available if you want to compile it
+  yourself.
   
-  To build the application from source, you will need a few things. First, the
-  source code which is available from our website
-  (http://games.technoplaza.net/). You will also need the Qt 4 development
-  libraries. They can be downloaded from http://www.trolltech.com/. Finally,
-  a ISO C++ compiler. We use GNU g++.
+  To compile, you will need a modern C++ compiler and Qt 4.
   
-  To compile the source, from the command prompt in the ggencoder directory.
+  On most platforms, compiling is as easy as opening a terminal and running
+  qmake && make (nmake for Visual Studio, or mingw32-make for mingw). That
+  should work on Linux, Mac OS X, and Windows.
   
-  cd source
-  qmake ggencoder.pro
-  make
-  
-  If you have questions, please feel free to contact us.
+  For more complete compilation instructions, consult our compiling HOWTO at
+  http://games.technoplaza.net/compile.php.
   
 --------------------------------------------------------------------------------
 | 4.0 Revision History
 --------------------------------------------------------------------------------
 
-  Version 0.91 (August 19, 2006)
+  Version 0.91a - Wednesday, December 17, 2008
+    - Fixed compiling on Qt 4 without Qt3 Support
+
+  Version 0.91 - Saturday, August 19, 2006
     - fixed bug that prevented encoding unless you had a partial code
     - major code cleanup
     - added Mac OS X binaries
   
-  Version 0.90 (July 30, 2005)
+  Version 0.90 - Saturday, July 30, 2005
     - initial public release
   
 --------------------------------------------------------------------------------
@@ -89,7 +88,7 @@
 | 6.0 License
 --------------------------------------------------------------------------------
 
-  Game Genie Encoder/Decoder is copyright (C) 2004-2006 emuWorks. It is licensed
-  under the GNU General Public License. The full text of the license is in
-  license.txt. You can learn more at http://www.gnu.org/.
+  Game Genie Encoder/Decoder is copyright (C) 2004-2006,2008 emuWorks. It is
+  licensed under the GNU General Public License. The full text of the license is
+  in docs/license.txt. You can learn more at http://www.gnu.org/.
 

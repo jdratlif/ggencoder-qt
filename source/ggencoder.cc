@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,16 +20,18 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: ggencoder.cc,v 1.9 2006/08/18 22:17:24 technoplaza Exp $
+// $Id: ggencoder.cc,v 1.11 2008/12/18 03:31:46 jdratlif Exp $
 
 #include <QApplication>
 
 #include "view/geniedialog.hh"
 
+using namespace ggencoder;
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     
-    emuWorks::GenieDialog dlg;
+    GenieDialog dlg;
     dlg.show();
     
     return app.exec();

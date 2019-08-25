@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,17 +20,17 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: geniedialog.hh,v 1.6 2006/08/19 15:43:05 technoplaza Exp $
+// $Id: geniedialog.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
-#ifndef _GENIEDIALOG_HH
-#define _GENIEDIALOG_HH
+#ifndef GGENCODER_GENIEDIALOG_HH_
+#define GGENCODER_GENIEDIALOG_HH_
 
 #include <QDialog>
 #include <QRegExpValidator>
 
 #include "ui_maindialog.h"
 
-namespace emuWorks {
+namespace ggencoder {
     /**
      * The main dialog for the application.
      */

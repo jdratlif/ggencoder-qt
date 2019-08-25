@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,7 +20,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: decoder.cc,v 1.8 2006/08/18 22:17:24 technoplaza Exp $
+// $Id: decoder.cc,v 1.9 2008/12/18 03:23:30 jdratlif Exp $
 
 #include <QString>
 
@@ -37,7 +37,7 @@
 
 #include "tools/decoder.hh"
 
-using namespace emuWorks;
+using namespace ggencoder;
 
 GBGGRawCode Decoder::decodeGBGG(const GameGenieCode &code) {
     QString ggcode = code.getCode();

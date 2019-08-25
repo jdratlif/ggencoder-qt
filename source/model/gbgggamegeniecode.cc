@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,11 +20,11 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: gbgggamegeniecode.cc,v 1.7 2006/08/18 22:17:24 technoplaza Exp $
+// $Id: gbgggamegeniecode.cc,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/gbgggamegeniecode.hh"
 
-using namespace emuWorks;
+using namespace ggencoder;
 
 const char GBGGGameGenieCode::ALPHABET[] = {
     '0', '1', '2', '3', '4', '5', '6', '7',

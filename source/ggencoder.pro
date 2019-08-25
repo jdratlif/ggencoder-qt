@@ -1,9 +1,9 @@
+# $Id: ggencoder.pro,v 1.15 2008/12/18 03:23:30 jdratlif Exp $
+
 TEMPLATE = app
 DEPENDPATH += . exceptions model tools view
 INCLUDEPATH += .
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.2
 
-# Input
 HEADERS += exceptions/invalidgamegeniecode.hh \
            model/comparerawcode.hh \
            model/gamegeniecode.hh \

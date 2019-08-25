@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,13 +20,13 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: system.hh,v 1.5 2006/08/19 15:43:05 technoplaza Exp $
+// $Id: system.hh,v 1.6 2008/12/18 03:23:30 jdratlif Exp $
 
-#ifndef _SYSTEM_HH
-#define _SYSTEM_HH
+#ifndef GGENCODER_SYSTEM_HH_
+#define GGENCODER_SYSTEM_HH_
 
 /// The namespace for all application members
-namespace emuWorks {
+namespace ggencoder {
     enum System {
         NES, SNES, GENESIS, GBGG
     };

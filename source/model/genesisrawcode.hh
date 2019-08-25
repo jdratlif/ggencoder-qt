@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,14 +20,14 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: genesisrawcode.hh,v 1.5 2006/08/18 22:17:24 technoplaza Exp $
+// $Id: genesisrawcode.hh,v 1.6 2008/12/18 03:23:30 jdratlif Exp $
 
-#ifndef _GENESISRAWCODE_HH
-#define _GENESISRAWCODE_HH
+#ifndef GGENCODER_GENESISRAWCODE_HH_
+#define GGENCODER_GENESISRAWCODE_HH_
 
 #include "model/rawcode.hh"
 
-namespace emuWorks {
+namespace ggencoder {
     /**
      * Implementation of a Genesis raw (or PAR) code.
      */

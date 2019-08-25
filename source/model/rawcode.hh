@@ -1,6 +1,6 @@
 /*
  * Game Genie Encoder/Decoder
- * Copyright (C) 2004-2006 emuWorks
+ * Copyright (C) 2004-2006,2008 emuWorks
  * http://games.technoplaza.net/
  *
  * This file is part of Game Genie Encoder/Decoder.
@@ -20,12 +20,12 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
  
-// $Id: rawcode.hh,v 1.6 2006/08/19 05:15:37 technoplaza Exp $
+// $Id: rawcode.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
-#ifndef _RAWCODE_HH
-#define _RAWCODE_HH
+#ifndef GGENCODER_RAWCODE_HH_
+#define GGENCODER_RAWCODE_HH_
 
-namespace emuWorks {
+namespace ggencoder {
     /**
      * Interface for a raw hex/PAR code.
      */
