@@ -1,0 +1,82 @@
+--------------------------------------------------------------------------------
+| Game Genie Encoder/Decoder
+| Copyright (C) 2004-2005 emuWorks
+| http://games.technoplaza.net/
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+| Table of Contents
+--------------------------------------------------------------------------------
+
+  - 1.0 Introduction
+  - 2.0 Usage
+  - 3.0 Building from Source
+  - 4.0 Contact Information
+  - 5.0 License
+
+--------------------------------------------------------------------------------
+| 1.0 Introduction
+--------------------------------------------------------------------------------
+
+  Game Genie Encoder/Decoder, as you might expect, is a tool for encoding or
+  decoding game genie codes. It works for all four kinds of game genie systems,
+  NES, Super NES, Genesis, and Game Boy/Game Gear.
+  
+--------------------------------------------------------------------------------
+| 2.0 Usage
+--------------------------------------------------------------------------------
+
+  This program should (I hope) be fairly intuitive. Just double-click the
+  executable or start it from the command line and the main window will come up.
+  
+  Select the system you want to use from the radio buttons (Nintendo, Super
+  Nintendo, Genesis, or Game Boy / Game Gear). Then start typing in the input
+  boxes.
+  
+  To encode game genie codes, simply fill in the value, address, and the compare
+  value (Nintendo and Game Boy / Game Gear only) and the code will automatically
+  appear in the game genie box below.
+  
+  To decode game genie codes, just put the game genie code in the game genie
+  input box. The address, value, and compare boxes will automatically be filled
+  in as you type. Codes must be entered as they appear in the code books. In
+  other words, you must add the slash(es) for Super Nintendo, Genesis, and Game
+  Boy / Game Gear codes.
+  
+--------------------------------------------------------------------------------
+| 3.0 Building from Source
+--------------------------------------------------------------------------------
+
+  Game Genie Encoder/Decoder is free software under the GNU General Public
+  License.
+  
+  To build the application from source, you will need a few things. First, the
+  source code which is available from our website
+  (http://games.technoplaza.net/). You will also need the Qt 4.0 development
+  libraries. They can be downloaded from http://www.trolltech.com/. Finally,
+  a ISO C++ compiler. We use GNU g++.
+  
+  To compile the source, from the command prompt in the ggencoder directory.
+  
+  cd source
+  qmake ggencoder.pro
+  uic -o view/ui_maindialog.h view/maindialog.ui
+  make
+  
+  If you have questions, please feel free to contact us.
+  
+--------------------------------------------------------------------------------
+| 4.0 Contact Information
+--------------------------------------------------------------------------------
+
+  emuWorks is located on the web at http://games.technoplaza.net/. You can
+  contact us at http://www.technoplaza.net/feedback.php or via email at
+  webmaster(AT)technoplaza.net (replacing the (AT) with the @ sign).
+  
+--------------------------------------------------------------------------------
+| 5.0 License
+--------------------------------------------------------------------------------
+
+  Game Genie Encoder/Decoder is copyright (C) 2004-2005 emuWorks. It is licensed
+  under the GNU General Public License. The full text of the license is in
+  license.txt. You can learn more at http://www.gnu.org/.
