@@ -1,5 +1,6 @@
 TEMPLATE = app
 TARGET = ggencoder
+QT += widgets
 DEPENDPATH += . exceptions model tools view
 INCLUDEPATH += .
 
