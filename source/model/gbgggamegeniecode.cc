@@ -74,7 +74,7 @@ bool GBGGGameGenieCode::isValidCode(const QString &code) {
         
         bool found = false;
         QChar ch = code[i];
-        char letter = ch.toAscii();
+        char letter = ch.toLatin1();
         
         for (int j = 0; j < count; j++) {
             if (letter == alphabet[j]) {

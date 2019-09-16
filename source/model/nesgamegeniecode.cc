@@ -60,7 +60,7 @@ bool NESGameGenieCode::isValidCode(const QString &code) {
     for (int i = 0; i < length; i++) {
         bool found = false;
         QChar ch = code[i];
-        char letter = ch.toAscii();
+        char letter = ch.toLatin1();
         
         for (int j = 0; j < count; j++) {
             if (letter == alphabet[j]) {

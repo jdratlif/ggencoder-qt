@@ -57,7 +57,7 @@ GBGGRawCode Decoder::decodeGBGG(const GameGenieCode &code) {
         QChar ch = ggcode[i];
         
         bitstring <<= 4;
-        bitstring |= code.toHex(ch.toAscii());
+        bitstring |= code.toHex(ch.toLatin1());
     }
     
     int value;
@@ -104,7 +104,7 @@ GenesisRawCode Decoder::decodeGenesis(const GameGenieCode &code) {
         QChar ch = ggcode[i];
         
         bitstring <<= 5;
-        bitstring |= code.toHex(ch.toAscii());
+        bitstring |= code.toHex(ch.toLatin1());
     }
     
     int value;
@@ -156,7 +156,7 @@ NESRawCode Decoder::decodeNES(const GameGenieCode &code) {
         QChar ch = ggcode[i];
         
         bitstring <<= 4;        
-        bitstring |= code.toHex(ch.toAscii());
+        bitstring |= code.toHex(ch.toLatin1());
     }
     
     int value;
@@ -234,7 +234,7 @@ SNESRawCode Decoder::decodeSNES(const GameGenieCode &code) {
         QChar ch = ggcode[i];
         
         bitstring <<= 4;
-        bitstring |= code.toHex(ch.toAscii());
+        bitstring |= code.toHex(ch.toLatin1());
     }
     
     int value;
