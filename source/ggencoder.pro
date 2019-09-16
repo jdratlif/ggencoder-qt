@@ -1,6 +1,5 @@
-# $Id: ggencoder.pro,v 1.15 2008/12/18 03:23:30 jdratlif Exp $
-
 TEMPLATE = app
+TARGET = ggencoder
 DEPENDPATH += . exceptions model tools view
 INCLUDEPATH += .
 
