@@ -99,14 +99,14 @@ void GenieDialog::decode() {
             NESGameGenieCode ggcode = NESGameGenieCode::create(text);
             NESRawCode rawcode = Decoder::decodeNES(ggcode);
             
-            str.sprintf("%02X", rawcode.getValue());
+            str = QString::asprintf("%02X", rawcode.getValue());
             ui.valueEdit->setText(str);
             
-            str.sprintf("%04X", rawcode.getAddress());
+            str = QString::asprintf("%04X", rawcode.getAddress());
             ui.addressEdit->setText(str);
             
             if (rawcode.hasCompare()) {
-                str.sprintf("%02X", rawcode.getCompare());
+                str = QString::asprintf("%02X", rawcode.getCompare());
                 ui.compareEdit->setText(str);
             } else {
                 ui.compareEdit->clear();
@@ -115,32 +115,32 @@ void GenieDialog::decode() {
             SNESGameGenieCode ggcode = SNESGameGenieCode::create(text);
             SNESRawCode rawcode = Decoder::decodeSNES(ggcode);
             
-            str.sprintf("%02X", rawcode.getValue());
+            str = QString::asprintf("%02X", rawcode.getValue());
             ui.valueEdit->setText(str);
             
-            str.sprintf("%04X", rawcode.getAddress());
+            str = QString::asprintf("%04X", rawcode.getAddress());
             ui.addressEdit->setText(str);
         } else if (system == GENESIS) {
             GenesisGameGenieCode ggcode = GenesisGameGenieCode::create(text);
             GenesisRawCode rawcode = Decoder::decodeGenesis(ggcode);
             
-            str.sprintf("%04X", rawcode.getValue());
+            str = QString::asprintf("%04X", rawcode.getValue());
             ui.valueEdit->setText(str);
             
-            str.sprintf("%04X", rawcode.getAddress());
+            str = QString::asprintf("%04X", rawcode.getAddress());
             ui.addressEdit->setText(str);
         } else if (system == GBGG) {
             GBGGGameGenieCode ggcode = GBGGGameGenieCode::create(text);
             GBGGRawCode rawcode = Decoder::decodeGBGG(ggcode);
             
-            str.sprintf("%02X", rawcode.getValue());
+            str = QString::asprintf("%02X", rawcode.getValue());
             ui.valueEdit->setText(str);
             
-            str.sprintf("%04X", rawcode.getAddress());
+            str = QString::asprintf("%04X", rawcode.getAddress());
             ui.addressEdit->setText(str);
             
             if (rawcode.hasCompare()) {
-                str.sprintf("%02X", rawcode.getCompare());
+                str = QString::asprintf("%02X", rawcode.getCompare());
                 ui.compareEdit->setText(str);
             } else {
                 ui.compareEdit->clear();
