@@ -1,5 +1,8 @@
-source/debug/*
-source/release/*
-source/Makefile*
+source/**/moc_*
+source/**/*.o
+source/debug/
+source/release/
+source/Makefile
 source/.qmake.stash
+source/ggencoder
 source/ui_*
