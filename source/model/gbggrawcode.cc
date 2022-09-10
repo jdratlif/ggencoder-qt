@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: gbggrawcode.cc,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/gbggrawcode.hh"
 
@@ -35,7 +33,7 @@ GBGGRawCode::GBGGRawCode(int address, int value, int compare) {
 GBGGRawCode::GBGGRawCode(int address, int value) {
     setAddress(address);
     setValue(value);
-    
+
     compare = -1;
 }
 
@@ -46,4 +44,3 @@ void GBGGRawCode::setAddress(int address) {
 void GBGGRawCode::setValue(int value) {
     this->value = (value & 0xFF);
 }
-

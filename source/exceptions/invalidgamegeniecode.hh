@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: invalidgamegeniecode.hh,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_INVALIDGAMEGENIECODEEXCEPTION_HH_
 #define GGENCODER_INVALIDGAMEGENIECODEEXCEPTION_HH_
@@ -32,16 +30,15 @@ namespace ggencoder {
      * An exception thrown when a game genie code is invalid.
      */
     class InvalidGameGenieCodeException : public std::runtime_error {
-    public:
+      public:
         /**
          * Constructor for an InvalidGameGenieCodeException.
          */
         InvalidGameGenieCodeException();
     };
-    
-    inline InvalidGameGenieCodeException::InvalidGameGenieCodeException() :
-        std::runtime_error("InvalidGameGenieCodeException") {}
-}
+
+    inline InvalidGameGenieCodeException::InvalidGameGenieCodeException()
+        : std::runtime_error("InvalidGameGenieCodeException") {}
+}  // namespace ggencoder
 
 #endif
-

@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: gbggrawcode.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_GBGGRAWCODE_HH_
 #define GGENCODER_GBGGRAWCODE_HH_
@@ -33,7 +31,7 @@ namespace ggencoder {
      * Implementation of an GBGG raw hex code.
      */
     class GBGGRawCode : public RawCode, public CompareRawCode {
-    public:
+      public:
         /**
          * Constructor for a GBGGRawCode with a compare value.
          *
@@ -42,7 +40,7 @@ namespace ggencoder {
          * @param compare The code's compare value.
          */
         GBGGRawCode(int address, int value, int compare);
-        
+
         /**
          * Constructor for a GBGGRawCode with no compare value.
          *
@@ -50,14 +48,14 @@ namespace ggencoder {
          * @param value The code's value.
          */
         GBGGRawCode(int address, int value);
-        
+
         /**
          * Sets the address of this RawCode.
          *
          * @param address The new address.
          */
         void setAddress(int address);
-        
+
         /**
          * Sets the value of this RawCode.
          *
@@ -65,7 +63,6 @@ namespace ggencoder {
          */
         void setValue(int value);
     };
-}
+}  // namespace ggencoder
 
 #endif
-

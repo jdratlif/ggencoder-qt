@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: rawcode.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_RAWCODE_HH_
 #define GGENCODER_RAWCODE_HH_
@@ -30,37 +28,37 @@ namespace ggencoder {
      * Interface for a raw hex/PAR code.
      */
     class RawCode {
-    protected:
+      protected:
         int address;
         int value;
-        
-    public:
+
+      public:
         /**
          * Virtual destructor for RawCode derivatives.
          */
         virtual ~RawCode();
-    
+
         /**
          * Gets the address of this RawCode.
          *
          * @return The address.
          */
         virtual int getAddress() const;
-        
+
         /**
          * Sets the address of this RawCode.
          *
          * @param address The new address.
          */
         virtual void setAddress(int address) = 0;
-        
+
         /**
          * Gets the value of this RawCode.
          *
          * @return The value.
          */
         virtual int getValue() const;
-        
+
         /**
          * Sets the value of this RawCode.
          *
@@ -68,11 +66,10 @@ namespace ggencoder {
          */
         virtual void setValue(int value) = 0;
     };
-    
+
     inline RawCode::~RawCode() {}
     inline int RawCode::getAddress() const { return address; }
     inline int RawCode::getValue() const { return value; }
-}
+}  // namespace ggencoder
 
 #endif
-

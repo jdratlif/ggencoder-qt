@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: nesrawcode.cc,v 1.9 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/nesrawcode.hh"
 
@@ -35,7 +33,7 @@ NESRawCode::NESRawCode(int address, int value, int compare) {
 NESRawCode::NESRawCode(int address, int value) {
     setAddress(address);
     setValue(value);
-    
+
     compare = -1;
 }
 
@@ -46,4 +44,3 @@ void NESRawCode::setAddress(int address) {
 void NESRawCode::setValue(int value) {
     this->value = (value & 0xFF);
 }
-

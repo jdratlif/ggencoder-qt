@@ -19,10 +19,7 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: invalidgamegeniecode.cc,v 1.3 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "exceptions/invalidgamegeniecode.hh"
 
 using namespace ggencoder;
-

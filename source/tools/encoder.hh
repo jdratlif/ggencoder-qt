@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: encoder.hh,v 1.5 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_ENCODER_HH_
 #define GGENCODER_ENCODER_HH_
@@ -34,18 +32,18 @@ namespace ggencoder {
     class NESRawCode;
     class SNESGameGenieCode;
     class SNESRawCode;
-    
+
     /**
      * A class to encode raw/PAR codes into Game Genie codes.
      */
     class Encoder {
-    private:
+      private:
         /**
          * Constructor for an Encoder. Private to prevent instantiation.
          */
         Encoder();
-        
-    public:
+
+      public:
         /**
          * Encodes a GBGGRawCode into a GameGenieCode.
          *
@@ -54,7 +52,7 @@ namespace ggencoder {
          * @return The encoded GameGenieCode.
          */
         static GBGGGameGenieCode encode(const GBGGRawCode &code);
-        
+
         /**
          * Encodes a GenesisRawCode into a GameGenieCode.
          *
@@ -63,7 +61,7 @@ namespace ggencoder {
          * @return The encoded GameGenieCode.
          */
         static GenesisGameGenieCode encode(const GenesisRawCode &code);
-        
+
         /**
          * Encodes an NESRawCode into a GameGenieCode.
          *
@@ -82,9 +80,8 @@ namespace ggencoder {
          */
         static SNESGameGenieCode encode(const SNESRawCode &code);
     };
-    
+
     inline Encoder::Encoder() {}
-}
+}  // namespace ggencoder
 
 #endif
-

@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: genesisgamegeniecode.hh,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_GENESISGAMEGENIECODE_HH_
 #define GGENCODER_GENESISGAMEGENIECODE_HH_
@@ -34,16 +32,16 @@ namespace ggencoder {
      * An implementation of a Genesis game genie code.
      */
     class GenesisGameGenieCode : public GameGenieCode {
-    private:
+      private:
         /**
          * Constructor for an GenesisGameGenieCode.
          */
         GenesisGameGenieCode(const QString &code);
-        
-    public:
+
+      public:
         /// The game genie alphabet.
         static const char ALPHABET[];
-        
+
         /**
          * Creates a GenesisGameGenieCode object.
          *
@@ -51,23 +49,23 @@ namespace ggencoder {
          *
          * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static GenesisGameGenieCode create(const QString &code)
-            throw (InvalidGameGenieCodeException);
-        
+        static GenesisGameGenieCode
+        create(const QString &code) throw(InvalidGameGenieCodeException);
+
         /**
          * Gets the game genie alphabet.
          *
          * @return The genie alphabet array.
          */
         const char *getAlphabet() const;
-        
+
         /**
          * Gets the number of letters in the game genie alphabet.
          *
          * @return The alphabet letter count.
          */
         int getAlphabetCount() const;
-        
+
         /**
          * Checks if the code is a valid game genie code.
          *
@@ -77,12 +75,11 @@ namespace ggencoder {
          */
         static bool isValidCode(const QString &code);
     };
-    
-    inline GenesisGameGenieCode::GenesisGameGenieCode(const QString &code)
-        { setCode(code); }
-    inline int GenesisGameGenieCode::getAlphabetCount() const
-        { return 32; } 
-}
+
+    inline GenesisGameGenieCode::GenesisGameGenieCode(const QString &code) {
+        setCode(code);
+    }
+    inline int GenesisGameGenieCode::getAlphabetCount() const { return 32; }
+}  // namespace ggencoder
 
 #endif
-

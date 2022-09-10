@@ -10,8 +10,8 @@
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
- * Game Genie Encoder/Decoder is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * Game Genie Encoder/Decoder is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: comparerawcode.hh,v 1.6 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_COMPARERAWCODE_HH_
 #define GGENCODER_COMPARERAWCODE_HH_
@@ -30,24 +28,24 @@ namespace ggencoder {
      * A raw code interface with a compare value.
      */
     class CompareRawCode {
-    protected:
+      protected:
         int compare;
-        
-    public:
+
+      public:
         /**
          * Checks if this CompareRawCode uses a compare value.
          *
          * @return true if a compare is used; false otherwise.
          */
         bool hasCompare() const;
-    
+
         /**
          * Gets the compare value of this CompareRawCode.
          *
          * @return The compare value.
          */
         int getCompare() const;
-        
+
         /**
          * Sets the compare value of this CompareRawCode.
          *
@@ -55,14 +53,12 @@ namespace ggencoder {
          */
         void setCompare(int compare);
     };
-    
-    inline bool CompareRawCode::hasCompare() const
-        { return (compare != -1); }
-    inline int CompareRawCode::getCompare() const
-        { return compare; }
-    inline void CompareRawCode::setCompare(int compare)
-        { this->compare = (compare & 0xFF); };
-}
+
+    inline bool CompareRawCode::hasCompare() const { return (compare != -1); }
+    inline int  CompareRawCode::getCompare() const { return compare; }
+    inline void CompareRawCode::setCompare(int compare) {
+        this->compare = (compare & 0xFF);
+    };
+}  // namespace ggencoder
 
 #endif
-

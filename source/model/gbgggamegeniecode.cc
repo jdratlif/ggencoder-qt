@@ -19,24 +19,21 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: gbgggamegeniecode.cc,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/gbgggamegeniecode.hh"
 
 using namespace ggencoder;
 
-const char GBGGGameGenieCode::ALPHABET[] = {
-    '0', '1', '2', '3', '4', '5', '6', '7',
-    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-};
+const char GBGGGameGenieCode::ALPHABET[] = {'0', '1', '2', '3', '4', '5',
+                                            '6', '7', '8', '9', 'A', 'B',
+                                            'C', 'D', 'E', 'F'};
 
-GBGGGameGenieCode GBGGGameGenieCode::create(const QString &code)
-    throw(InvalidGameGenieCodeException) {
+GBGGGameGenieCode GBGGGameGenieCode::create(const QString &code) throw(
+    InvalidGameGenieCodeException) {
     if (isValidCode(code)) {
         return GBGGGameGenieCode(code);
     }
-    
+
     throw InvalidGameGenieCodeException();
 }
 
@@ -46,48 +43,47 @@ const char *GBGGGameGenieCode::getAlphabet() const {
 
 bool GBGGGameGenieCode::isValidCode(const QString &code) {
     GBGGGameGenieCode temp(code);
-    
+
     const char *alphabet = temp.getAlphabet();
-    int count = temp.getAlphabetCount();
-    
-    QString upper = code.toUpper();
-    int length = upper.length();
-    
+    int         count    = temp.getAlphabetCount();
+
+    QString upper  = code.toUpper();
+    int     length = upper.length();
+
     if ((length != 7) && (length != 11)) {
         return false;
     }
-    
+
     if (code[3] != '-') {
         return false;
     }
-    
+
     if (length == 11) {
         if (code[7] != '-') {
             return false;
         }
     }
-    
+
     for (int i = 0; i < length; i++) {
         if ((i == 3) || (i == 7)) {
             continue;
         }
-        
-        bool found = false;
-        QChar ch = code[i];
-        char letter = ch.toLatin1();
-        
+
+        bool  found  = false;
+        QChar ch     = code[i];
+        char  letter = ch.toLatin1();
+
         for (int j = 0; j < count; j++) {
             if (letter == alphabet[j]) {
                 found = true;
                 break;
             }
         }
-        
+
         if (!found) {
             return false;
         }
     }
-    
+
     return true;
 }
-

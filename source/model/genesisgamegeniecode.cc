@@ -19,26 +19,22 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: genesisgamegeniecode.cc,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/genesisgamegeniecode.hh"
 
 using namespace ggencoder;
 
 const char GenesisGameGenieCode::ALPHABET[] = {
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-    'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S',
-    'T', 'V', 'W', 'X', 'Y', 'Z', '0', '1',
-    '2', '3', '4', '5', '6', '7', '8', '9'
-};
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L',
+    'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z',
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-GenesisGameGenieCode GenesisGameGenieCode::create(const QString &code)
-    throw(InvalidGameGenieCodeException) {
+GenesisGameGenieCode GenesisGameGenieCode::create(const QString &code) throw(
+    InvalidGameGenieCodeException) {
     if (isValidCode(code)) {
         return GenesisGameGenieCode(code);
     }
-    
+
     throw InvalidGameGenieCodeException();
 }
 
@@ -48,42 +44,41 @@ const char *GenesisGameGenieCode::getAlphabet() const {
 
 bool GenesisGameGenieCode::isValidCode(const QString &code) {
     GenesisGameGenieCode temp(code);
-    
+
     const char *alphabet = temp.getAlphabet();
-    int count = temp.getAlphabetCount();
-    
-    QString upper = code.toUpper();
-    int length = upper.length();
-    
+    int         count    = temp.getAlphabetCount();
+
+    QString upper  = code.toUpper();
+    int     length = upper.length();
+
     if (length != 9) {
         return false;
     }
-    
+
     if (code[4] != '-') {
         return false;
     }
-    
+
     for (int i = 0; i < length; i++) {
         if (i == 4) {
             continue;
         }
-        
-        bool found = false;
-        QChar ch = code[i];
-        char letter = ch.toLatin1();
-        
+
+        bool  found  = false;
+        QChar ch     = code[i];
+        char  letter = ch.toLatin1();
+
         for (int j = 0; j < count; j++) {
             if (letter == alphabet[j]) {
                 found = true;
                 break;
             }
         }
-        
+
         if (!found) {
             return false;
         }
     }
-    
+
     return true;
 }
-

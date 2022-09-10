@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: snesrawcode.cc,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/snesrawcode.hh"
 
@@ -38,4 +36,3 @@ void SNESRawCode::setAddress(int address) {
 void SNESRawCode::setValue(int value) {
     this->value = (value & 0xFF);
 }
-

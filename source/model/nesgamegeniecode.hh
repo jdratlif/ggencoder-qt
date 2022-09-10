@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: nesgamegeniecode.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_NESGAMEGENIECODE_HH_
 #define GGENCODER_NESGAMEGENIECODE_HH_
@@ -34,16 +32,16 @@ namespace ggencoder {
      * An implementation of an NES game genie code.
      */
     class NESGameGenieCode : public GameGenieCode {
-    private:
+      private:
         /**
          * Constructor for an NESGameGenieCode.
          */
         NESGameGenieCode(const QString &code);
-        
-    public:
+
+      public:
         /// The game genie alphabet.
         static const char ALPHABET[];
-        
+
         /**
          * Creates an NESGameGenieCode object.
          *
@@ -51,16 +49,16 @@ namespace ggencoder {
          *
          * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static NESGameGenieCode create(const QString &code)
-            throw (InvalidGameGenieCodeException);
-        
+        static NESGameGenieCode
+        create(const QString &code) throw(InvalidGameGenieCodeException);
+
         /**
          * Gets the game genie alphabet.
          *
          * @return The genie alphabet array.
          */
         const char *getAlphabet() const;
-    
+
         /**
          * Checks if the code is a valid game genie code.
          *
@@ -70,10 +68,10 @@ namespace ggencoder {
          */
         static bool isValidCode(const QString &code);
     };
-    
-    inline NESGameGenieCode::NESGameGenieCode(const QString &code)
-        { setCode(code); }
-}
+
+    inline NESGameGenieCode::NESGameGenieCode(const QString &code) {
+        setCode(code);
+    }
+}  // namespace ggencoder
 
 #endif
-

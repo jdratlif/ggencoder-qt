@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: genesisrawcode.cc,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/genesisrawcode.hh"
 
@@ -38,4 +36,3 @@ void GenesisRawCode::setAddress(int address) {
 void GenesisRawCode::setValue(int value) {
     this->value = (value & 0xFFFF);
 }
-

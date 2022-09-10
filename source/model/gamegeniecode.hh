@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: gamegeniecode.hh,v 1.9 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_GAMEGENIECODE_HH_
 #define GGENCODER_GAMEGENIECODE_HH_
@@ -32,43 +30,43 @@ namespace ggencoder {
      * Interface for a Game Genie code.
      */
     class GameGenieCode {
-    private:
+      private:
         QString code;
-        
-    public:
+
+      public:
         /**
          * Virtual destructor for a GameGenieCode.
          */
         virtual ~GameGenieCode();
-        
+
         /**
          * Gets the game genie alphabet.
          *
          * @return The genie alphabet array.
          */
         virtual const char *getAlphabet() const = 0;
-        
+
         /**
          * Gets the number of letters in the game genie alphabet.
          *
          * @return The alphabet letter count.
          */
         virtual int getAlphabetCount() const;
-    
+
         /**
          * Gets the game genie code.
          *
          * @return The game genie code.
          */
         const QString &getCode() const;
-        
+
         /**
          * Sets the game genie code.
          *
          * @param code The new game genie code.
          */
         void setCode(const QString &code);
-        
+
         /**
          * Gets the corresponding hex value for a particular game genie letter.
          *
@@ -78,15 +76,13 @@ namespace ggencoder {
          */
         virtual int toHex(char letter) const;
     };
-    
+
     inline GameGenieCode::~GameGenieCode() {}
-    inline int GameGenieCode::getAlphabetCount() const
-        { return 16; }
-    inline const QString &GameGenieCode::getCode() const
-        { return code; }
-    inline void GameGenieCode::setCode(const QString &code)
-        { this->code = code.toUpper(); }
-}
+    inline int            GameGenieCode::getAlphabetCount() const { return 16; }
+    inline const QString &GameGenieCode::getCode() const { return code; }
+    inline void           GameGenieCode::setCode(const QString &code) {
+        this->code = code.toUpper();
+    }
+}  // namespace ggencoder
 
 #endif
-

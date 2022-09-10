@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: geniedialog.hh,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #ifndef GGENCODER_GENIEDIALOG_HH_
 #define GGENCODER_GENIEDIALOG_HH_
@@ -36,87 +34,87 @@ namespace ggencoder {
      */
     class GenieDialog : public QDialog {
         Q_OBJECT
-        
-    private:
+
+      private:
         QRegExpValidator *hexValidator;
         QRegExpValidator *nesValidator;
         QRegExpValidator *snesValidator;
         QRegExpValidator *genesisValidator;
         QRegExpValidator *gbggValidator;
-        Ui::MainDialog ui;
-        int system;
-        bool encoding, decoding;
-        
+        Ui::MainDialog    ui;
+        int               system;
+        bool              encoding, decoding;
+
         /**
          * Decodes the game genie code into value, address, and compare
          * components.
          */
         void decode();
-        
+
         /**
          * Encodes the value, address, and compare into a game genie code.
          */
         void encode();
-        
+
         /**
          * Resets the controls.
          */
         void reset();
-        
-    public:
+
+      public:
         /**
          * Creates a new GenieDialog.
          */
         GenieDialog();
-        
+
         /**
          * Destructor for a GenieDialog.
          */
         ~GenieDialog();
-        
-    private slots:
+
+      private slots:
         /**
          * Called when the address box is edited.
-         * 
+         *
          * @param text The new text.
          */
         void on_addressEdit_textEdited(const QString &text);
-        
+
         /**
          * Called when the compare box is edited.
-         * 
+         *
          * @param text The new text.
          */
         void on_compareEdit_textEdited(const QString &text);
-        
+
         /**
          * Called when the game genie box is edited.
-         * 
+         *
          * @param text The new text.
          */
         void on_gamegenieEdit_textEdited(const QString &text);
-        
+
         /**
          * Called when the Game Boy / Game Gear radio button is toggled.
          *
          * @param checked true if it was checked; false otherwise
          */
         void on_gbggRadio_toggled(bool checked);
-        
+
         /**
          * Called when the Genesis radio button is toggled.
          *
          * @param checked true if it was checked; false otherwise
          */
         void on_genesisRadio_toggled(bool checked);
-        
+
         /**
          * Called when the NES radio button is toggled.
          *
          * @param checked true if it was checked; false otherwise
          */
         void on_nesRadio_toggled(bool checked);
-        
+
         /**
          * Called when the SNES radio button is toggled.
          *
@@ -131,7 +129,6 @@ namespace ggencoder {
          */
         void on_valueEdit_textEdited(const QString &text);
     };
-}
+}  // namespace ggencoder
 
 #endif
-

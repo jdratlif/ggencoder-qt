@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: gamegeniecode.cc,v 1.7 2008/12/18 03:23:30 jdratlif Exp $
 
 #include <cctype>
 
@@ -30,16 +28,15 @@ using namespace ggencoder;
 
 int GameGenieCode::toHex(char letter) const {
     letter = toupper(letter);
-    
+
     const char *alphabet = getAlphabet();
-    int count = getAlphabetCount();
-    
+    int         count    = getAlphabetCount();
+
     for (int i = 0; i < count; i++) {
         if (alphabet[i] == letter) {
             return i;
         }
     }
-    
+
     return -1;
 }
-

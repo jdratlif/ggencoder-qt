@@ -19,8 +19,6 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: ggencoder.cc,v 1.11 2008/12/18 03:31:46 jdratlif Exp $
 
 #include <QApplication>
 
@@ -30,10 +28,9 @@ using namespace ggencoder;
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    
+
     GenieDialog dlg;
     dlg.show();
-    
+
     return app.exec();
 }
-

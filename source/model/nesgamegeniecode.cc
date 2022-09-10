@@ -19,24 +19,21 @@
  * along with Game Genie Encoder/Decoder; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
- 
-// $Id: nesgamegeniecode.cc,v 1.8 2008/12/18 03:23:30 jdratlif Exp $
 
 #include "model/nesgamegeniecode.hh"
 
 using namespace ggencoder;
 
-const char NESGameGenieCode::ALPHABET[] = {
-    'A', 'P', 'Z', 'L', 'G', 'I', 'T', 'Y',
-    'E', 'O', 'X', 'U', 'K', 'S', 'V', 'N'
-};
+const char NESGameGenieCode::ALPHABET[] = {'A', 'P', 'Z', 'L', 'G', 'I',
+                                           'T', 'Y', 'E', 'O', 'X', 'U',
+                                           'K', 'S', 'V', 'N'};
 
-NESGameGenieCode NESGameGenieCode::create(const QString &code)
-    throw(InvalidGameGenieCodeException) {
+NESGameGenieCode NESGameGenieCode::create(const QString &code) throw(
+    InvalidGameGenieCodeException) {
     if (isValidCode(code)) {
         return NESGameGenieCode(code);
     }
-    
+
     throw InvalidGameGenieCodeException();
 }
 
@@ -46,34 +43,33 @@ const char *NESGameGenieCode::getAlphabet() const {
 
 bool NESGameGenieCode::isValidCode(const QString &code) {
     NESGameGenieCode temp(code);
-    
+
     const char *alphabet = temp.getAlphabet();
-    int count = temp.getAlphabetCount();
-    
-    QString upper = code.toUpper();
-    int length = upper.length();
-    
+    int         count    = temp.getAlphabetCount();
+
+    QString upper  = code.toUpper();
+    int     length = upper.length();
+
     if ((length != 6) && (length != 8)) {
         return false;
     }
-    
+
     for (int i = 0; i < length; i++) {
-        bool found = false;
-        QChar ch = code[i];
-        char letter = ch.toLatin1();
-        
+        bool  found  = false;
+        QChar ch     = code[i];
+        char  letter = ch.toLatin1();
+
         for (int j = 0; j < count; j++) {
             if (letter == alphabet[j]) {
                 found = true;
                 break;
             }
         }
-        
+
         if (!found) {
             return false;
         }
     }
-    
+
     return true;
 }
-
