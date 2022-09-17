@@ -31,7 +31,7 @@ const char GenesisGameGenieCode::ALPHABET[] = {
 
 auto GenesisGameGenieCode::create(const QString &code) -> GenesisGameGenieCode {
     if (isValidCode(code)) {
-        return GenesisGameGenieCode(code);
+        return {code};
     }
 
     throw InvalidGameGenieCodeException();

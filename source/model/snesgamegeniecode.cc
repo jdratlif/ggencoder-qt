@@ -30,7 +30,7 @@ const char SNESGameGenieCode::ALPHABET[] = {'D', 'F', '4', '7', '0', '9',
 
 auto SNESGameGenieCode::create(const QString &code) -> SNESGameGenieCode {
     if (isValidCode(code)) {
-        return SNESGameGenieCode(code);
+        return {code};
     }
 
     throw InvalidGameGenieCodeException();

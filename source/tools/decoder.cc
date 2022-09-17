@@ -73,7 +73,7 @@ auto Decoder::decodeGBGG(const GameGenieCode &code) -> GBGGRawCode {
     address = (int)((bitstring >> 16) & 0xFFF) | temp;
 
     if (length == 7) {
-        return GBGGRawCode(address, value);
+        return {address, value};
     }
 
     temp = (int)(((bitstring >> 4) & 0xF0) | (bitstring & 0xF));
@@ -81,7 +81,7 @@ auto Decoder::decodeGBGG(const GameGenieCode &code) -> GBGGRawCode {
 
     int compare = temp ^ 0xBA;
 
-    return GBGGRawCode(address, value, compare);
+    return {address, value, compare};
 }
 
 auto Decoder::decodeGenesis(const GameGenieCode &code) -> GenesisRawCode {
@@ -137,7 +137,7 @@ auto Decoder::decodeGenesis(const GameGenieCode &code) -> GenesisRawCode {
     address <<= 8;
     address |= temp;
 
-    return GenesisRawCode(address, value);
+    return {address, value};
 }
 
 auto Decoder::decodeNES(const GameGenieCode &code) -> NESRawCode {
@@ -198,7 +198,7 @@ auto Decoder::decodeNES(const GameGenieCode &code) -> NESRawCode {
     address |= temp;
 
     if (length == 6) {
-        return NESRawCode(address, value);
+        return {address, value};
     }
 
     int compare;
@@ -211,7 +211,7 @@ auto Decoder::decodeNES(const GameGenieCode &code) -> NESRawCode {
     compare <<= 4;
     compare |= temp;
 
-    return NESRawCode(address, value, compare);
+    return {address, value, compare};
 }
 
 auto Decoder::decodeSNES(const GameGenieCode &code) -> SNESRawCode {
@@ -270,5 +270,5 @@ auto Decoder::decodeSNES(const GameGenieCode &code) -> SNESRawCode {
     address <<= 4;
     address |= temp;
 
-    return SNESRawCode(address, value);
+    return {address, value};
 }

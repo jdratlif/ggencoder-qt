@@ -30,7 +30,7 @@ const char GBGGGameGenieCode::ALPHABET[] = {'0', '1', '2', '3', '4', '5',
 
 auto GBGGGameGenieCode::create(const QString &code) -> GBGGGameGenieCode {
     if (isValidCode(code)) {
-        return GBGGGameGenieCode(code);
+        return {code};
     }
 
     throw InvalidGameGenieCodeException();

@@ -30,7 +30,7 @@ const char NESGameGenieCode::ALPHABET[] = {'A', 'P', 'Z', 'L', 'G', 'I',
 
 auto NESGameGenieCode::create(const QString &code) -> NESGameGenieCode {
     if (isValidCode(code)) {
-        return NESGameGenieCode(code);
+        return {code};
     }
 
     throw InvalidGameGenieCodeException();
