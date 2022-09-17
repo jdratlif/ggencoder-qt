@@ -33,6 +33,13 @@ namespace ggencoder {
 
       public:
         /**
+         * Constructor
+         *
+         * @param compare The compare value
+         */
+        CompareRawCode(int compare) : compare{compare} {}
+
+        /**
          * Checks if this CompareRawCode uses a compare value.
          *
          * @return true if a compare is used; false otherwise.

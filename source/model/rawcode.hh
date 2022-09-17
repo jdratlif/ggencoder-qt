@@ -34,6 +34,14 @@ namespace ggencoder {
 
       public:
         /**
+         * Constructor
+         *
+         * @param address The address of this RawCode
+         * @param value The value of this RawCode
+         */
+        RawCode(int address, int value) : address{address}, value{value} {};
+
+        /**
          * Virtual destructor for RawCode derivatives.
          */
         virtual ~RawCode();
