@@ -54,8 +54,12 @@ namespace ggencoder {
         void setCompare(int compare);
     };
 
-    inline bool CompareRawCode::hasCompare() const { return (compare != -1); }
-    inline int  CompareRawCode::getCompare() const { return compare; }
+    inline bool CompareRawCode::hasCompare() const {
+        return (compare != -1);
+    }
+    inline int CompareRawCode::getCompare() const {
+        return compare;
+    }
     inline void CompareRawCode::setCompare(int compare) {
         this->compare = (compare & 0xFF);
     };

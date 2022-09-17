@@ -68,8 +68,12 @@ namespace ggencoder {
     };
 
     inline RawCode::~RawCode() {}
-    inline int RawCode::getAddress() const { return address; }
-    inline int RawCode::getValue() const { return value; }
+    inline int RawCode::getAddress() const {
+        return address;
+    }
+    inline int RawCode::getValue() const {
+        return value;
+    }
 }  // namespace ggencoder
 
 #endif

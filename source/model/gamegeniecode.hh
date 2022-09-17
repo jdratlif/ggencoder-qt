@@ -78,9 +78,13 @@ namespace ggencoder {
     };
 
     inline GameGenieCode::~GameGenieCode() {}
-    inline int            GameGenieCode::getAlphabetCount() const { return 16; }
-    inline const QString &GameGenieCode::getCode() const { return code; }
-    inline void           GameGenieCode::setCode(const QString &code) {
+    inline int GameGenieCode::getAlphabetCount() const {
+        return 16;
+    }
+    inline const QString &GameGenieCode::getCode() const {
+        return code;
+    }
+    inline void GameGenieCode::setCode(const QString &code) {
         this->code = code.toUpper();
     }
 }  // namespace ggencoder
