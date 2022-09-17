@@ -24,10 +24,8 @@
 
 using namespace ggencoder;
 
-SNESRawCode::SNESRawCode(int address, int value) {
-    setAddress(address);
-    setValue(value);
-}
+SNESRawCode::SNESRawCode(int address, int value)
+    : RawCode{address & 0xFFFFFF, value & 0xFF} {}
 
 void SNESRawCode::setAddress(int address) {
     this->address = (address & 0xFFFFFF);

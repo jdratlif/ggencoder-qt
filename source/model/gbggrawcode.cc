@@ -24,18 +24,11 @@
 
 using namespace ggencoder;
 
-GBGGRawCode::GBGGRawCode(int address, int value, int compare) {
-    setAddress(address);
-    setValue(value);
-    setCompare(compare);
-}
+GBGGRawCode::GBGGRawCode(int address, int value, int compare)
+    : RawCode{address & 0xFFFF, value & 0xFF}, CompareRawCode{compare} {}
 
-GBGGRawCode::GBGGRawCode(int address, int value) {
-    setAddress(address);
-    setValue(value);
-
-    compare = -1;
-}
+GBGGRawCode::GBGGRawCode(int address, int value)
+    : RawCode{address & 0xFFFF, value & 0xFF}, CompareRawCode{-1} {}
 
 void GBGGRawCode::setAddress(int address) {
     this->address = (address & 0xFFFF);

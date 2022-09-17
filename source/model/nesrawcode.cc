@@ -24,18 +24,11 @@
 
 using namespace ggencoder;
 
-NESRawCode::NESRawCode(int address, int value, int compare) {
-    setAddress(address);
-    setValue(value);
-    setCompare(compare);
-}
+NESRawCode::NESRawCode(int address, int value, int compare)
+    : RawCode{address & 0xFFFF, value & 0xFF}, CompareRawCode{compare} {}
 
-NESRawCode::NESRawCode(int address, int value) {
-    setAddress(address);
-    setValue(value);
-
-    compare = -1;
-}
+NESRawCode::NESRawCode(int address, int value)
+    : RawCode{address & 0xFFFF, value & 0xFF}, CompareRawCode{-1} {}
 
 void NESRawCode::setAddress(int address) {
     this->address = (address & 0xFFFF);

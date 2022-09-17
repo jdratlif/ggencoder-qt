@@ -24,10 +24,8 @@
 
 using namespace ggencoder;
 
-GenesisRawCode::GenesisRawCode(int address, int value) {
-    setAddress(address);
-    setValue(value);
-}
+GenesisRawCode::GenesisRawCode(int address, int value)
+    : RawCode{address & 0xFFFFFF, value & 0xFFFF} {}
 
 void GenesisRawCode::setAddress(int address) {
     this->address = (address & 0xFFFFFF);
