@@ -28,7 +28,7 @@ const char GBGGGameGenieCode::ALPHABET[] = {'0', '1', '2', '3', '4', '5',
                                             '6', '7', '8', '9', 'A', 'B',
                                             'C', 'D', 'E', 'F'};
 
-GBGGGameGenieCode GBGGGameGenieCode::create(const QString &code) {
+auto GBGGGameGenieCode::create(const QString &code) -> GBGGGameGenieCode {
     if (isValidCode(code)) {
         return GBGGGameGenieCode(code);
     }
@@ -36,11 +36,11 @@ GBGGGameGenieCode GBGGGameGenieCode::create(const QString &code) {
     throw InvalidGameGenieCodeException();
 }
 
-const char *GBGGGameGenieCode::getAlphabet() const {
+auto GBGGGameGenieCode::getAlphabet() const -> const char * {
     return ALPHABET;
 }
 
-bool GBGGGameGenieCode::isValidCode(const QString &code) {
+auto GBGGGameGenieCode::isValidCode(const QString &code) -> bool {
     GBGGGameGenieCode temp(code);
 
     const char *alphabet = temp.getAlphabet();

@@ -26,7 +26,7 @@
 
 using namespace ggencoder;
 
-int GameGenieCode::toHex(char letter) const {
+auto GameGenieCode::toHex(char letter) const -> int {
     letter = toupper(letter);
 
     const char *alphabet = getAlphabet();

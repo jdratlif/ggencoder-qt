@@ -28,7 +28,7 @@ const char NESGameGenieCode::ALPHABET[] = {'A', 'P', 'Z', 'L', 'G', 'I',
                                            'T', 'Y', 'E', 'O', 'X', 'U',
                                            'K', 'S', 'V', 'N'};
 
-NESGameGenieCode NESGameGenieCode::create(const QString &code) {
+auto NESGameGenieCode::create(const QString &code) -> NESGameGenieCode {
     if (isValidCode(code)) {
         return NESGameGenieCode(code);
     }
@@ -36,11 +36,11 @@ NESGameGenieCode NESGameGenieCode::create(const QString &code) {
     throw InvalidGameGenieCodeException();
 }
 
-const char *NESGameGenieCode::getAlphabet() const {
+auto NESGameGenieCode::getAlphabet() const -> const char * {
     return ALPHABET;
 }
 
-bool NESGameGenieCode::isValidCode(const QString &code) {
+auto NESGameGenieCode::isValidCode(const QString &code) -> bool {
     NESGameGenieCode temp(code);
 
     const char *alphabet = temp.getAlphabet();

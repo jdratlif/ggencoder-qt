@@ -37,7 +37,7 @@
 
 using namespace ggencoder;
 
-GBGGRawCode Decoder::decodeGBGG(const GameGenieCode &code) {
+auto Decoder::decodeGBGG(const GameGenieCode &code) -> GBGGRawCode {
     QString ggcode = code.getCode();
     int     length = ggcode.length();
 
@@ -84,7 +84,7 @@ GBGGRawCode Decoder::decodeGBGG(const GameGenieCode &code) {
     return GBGGRawCode(address, value, compare);
 }
 
-GenesisRawCode Decoder::decodeGenesis(const GameGenieCode &code) {
+auto Decoder::decodeGenesis(const GameGenieCode &code) -> GenesisRawCode {
     QString ggcode = code.getCode();
     int     length = ggcode.length();
 
@@ -140,7 +140,7 @@ GenesisRawCode Decoder::decodeGenesis(const GameGenieCode &code) {
     return GenesisRawCode(address, value);
 }
 
-NESRawCode Decoder::decodeNES(const GameGenieCode &code) {
+auto Decoder::decodeNES(const GameGenieCode &code) -> NESRawCode {
     QString ggcode = code.getCode();
     int     length = ggcode.length();
 
@@ -214,7 +214,7 @@ NESRawCode Decoder::decodeNES(const GameGenieCode &code) {
     return NESRawCode(address, value, compare);
 }
 
-SNESRawCode Decoder::decodeSNES(const GameGenieCode &code) {
+auto Decoder::decodeSNES(const GameGenieCode &code) -> SNESRawCode {
     QString ggcode = code.getCode();
     int     length = ggcode.length();
 
