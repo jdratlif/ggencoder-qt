@@ -144,7 +144,7 @@ void GenieDialog::decode() {
                 ui.compareEdit->clear();
             }
         }
-    } catch (InvalidGameGenieCodeException e) {
+    } catch (InvalidGameGenieCodeException &e) {
         // must not be ready yet...
     }
 
