@@ -29,8 +29,7 @@ const char GenesisGameGenieCode::ALPHABET[] = {
     'M', 'N', 'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z',
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-GenesisGameGenieCode GenesisGameGenieCode::create(const QString &code) throw(
-    InvalidGameGenieCodeException) {
+GenesisGameGenieCode GenesisGameGenieCode::create(const QString &code) {
     if (isValidCode(code)) {
         return GenesisGameGenieCode(code);
     }

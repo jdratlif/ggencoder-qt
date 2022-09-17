@@ -49,8 +49,7 @@ namespace ggencoder {
          *
          * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static SNESGameGenieCode
-        create(const QString &code) throw(InvalidGameGenieCodeException);
+        static SNESGameGenieCode create(const QString &code);
 
         /**
          * Gets the game genie alphabet.

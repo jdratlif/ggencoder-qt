@@ -49,8 +49,7 @@ namespace ggencoder {
          *
          * @throws InvalidGameGenieCodeException if the code is invalid.
          */
-        static GenesisGameGenieCode
-        create(const QString &code) throw(InvalidGameGenieCodeException);
+        static GenesisGameGenieCode create(const QString &code);
 
         /**
          * Gets the game genie alphabet.
@@ -79,7 +78,9 @@ namespace ggencoder {
     inline GenesisGameGenieCode::GenesisGameGenieCode(const QString &code) {
         setCode(code);
     }
-    inline int GenesisGameGenieCode::getAlphabetCount() const { return 32; }
+    inline int GenesisGameGenieCode::getAlphabetCount() const {
+        return 32;
+    }
 }  // namespace ggencoder
 
 #endif
